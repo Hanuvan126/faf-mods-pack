@@ -12,7 +12,15 @@ UnitBlueprint {
     },
     AverageDensity = 2100,
     Defense = { ArmorType = 'Structure', Health = 18000, MaxHealth = 18000, SurfaceThreatLevel = 100 },
-    Display = { UniformScale = 0.05, Mesh = { IconFadeInZoom = 160, LODs = { {
+    Display = {
+        Tarmacs = { {
+            Albedo = 'Tarmacs/Tar12x_seraphim_01_albedo',
+            Normal = 'Tarmacs/Tar12x_seraphim_01_normals',
+            Width = 6.4, Length = 6.4,
+            Orientations = { 0, 90, 180, 270 },
+            DeathLifetime = 300, FadeOut = 150, RemoveWhenDead = false,
+        } },
+        UniformScale = 0.05, Mesh = { IconFadeInZoom = 160, LODs = { {
     MeshName = '/mods/Project Roc Unicorns/units/GGA2404/GGA2404_lod0.scm',
     AlbedoName = '/mods/Project Roc Unicorns/units/GGA2404/GGA2404_albedo.dds',
     SpecularName = '/mods/Project Roc Unicorns/units/GGA2404/GGA2404_specteam.dds',
@@ -50,7 +58,7 @@ UnitBlueprint {
         PostShotDelayTicks = 1, CloseTicks = 3, ClosedInwardOffset = 0.42,
         HoverHeight = 0.08, HoverPeriodTicks = 40, VisualScale = 0.05,
     },
-    SelectionSizeX = 1.85, SelectionSizeZ = 1.85, SelectionThickness = 1.9,
+    SelectionSizeX = 1.85, SelectionSizeZ = 1.85, SelectionThickness = 0.25,
     StrategicIconName = 'icon_structure3_artillery', StrategicIconSortPriority = 240,
     Weapon = { {
         Label = 'MainGun', DisplayName = 'Levitating Phason Mortar',
@@ -84,7 +92,7 @@ UnitBlueprint {
         TurretYaw = 0, TurretYawRange = 180, TurretYawSpeed = 45,
         Turreted = true, WeaponCategory = 'Artillery', WeaponUnpacks = false,
     } },
-    Wreckage = { Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+    Wreckage = { Blueprint = '/mods/Project Roc Unicorns/props/GGA2404_wreck/GGA2404_wreck_prop.bp', UseCustomMesh = true,
         EnergyMult = 0, HealthMult = 0.9, MassMult = 0.9, ReclaimTimeMultiplier = 1,
         WreckageLayers = { Land = true } },
 }

@@ -14,7 +14,7 @@ UnitBlueprint {
     AverageDensity = 6500,
     Categories = {
         'BUILTBYTIER3COMMANDER', 'BUILTBYTIER3ENGINEER', 'CQUEMOV', 'DIRECTFIRE',
-        'DRAGBUILD', 'EXPERIMENTAL', 'HOVER', 'LAND', 'MOBILE', 'NEEDMOBILEBUILD',
+        'DRAGBUILD', 'TECH3', 'HOVER', 'LAND', 'MOBILE', 'NEEDMOBILEBUILD',
         'OVERLAYDIRECTFIRE', 'OVERLAYDEFENSE', 'PRODUCTFA',
         'RECLAIMABLE', 'SELECTABLE', 'SERAPHIM', 'SHIELD', 'SHOWATTACKRETICLE',
         'TANK', 'VISIBLETORECON',
@@ -37,7 +37,7 @@ UnitBlueprint {
         },
     },
     Display = {
-        Abilities = { '<LOC ability_hover>Hover', '<LOC ability_personalshield>Personal Shield' },
+        Abilities = { '<LOC ability_hover>Hover', '<LOC ability_massive>Massive', '<LOC ability_personalshield>Personal Shield' },
         MeshBlueprint = '/mods/Project Roc Unicorns/units/GGA0401/GGA0401_mesh',
         UniformScale = 0.1,
         IdleEffects = {
@@ -56,10 +56,10 @@ UnitBlueprint {
         },
     },
     Economy = {
-        BuildCostMass = 32000, BuildCostEnergy = 480000, BuildTime = 52000,
+        BuildCostMass = 12000, BuildCostEnergy = 480000, BuildTime = 52000,
         MaintenanceConsumptionPerSecondEnergy = 400,
     },
-    Footprint = { SizeX = 4, SizeZ = 6 },
+    Footprint = { SizeX = 6, SizeZ = 6 },
     General = {
         FactionName = 'Seraphim', UnitName = "<LOC gga0401_name>Dush'Nai", Icon = 'amph',
         CommandCaps = {
@@ -118,7 +118,7 @@ UnitBlueprint {
 
     },
     Wreckage = {
-        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        Blueprint = '/mods/Project Roc Unicorns/props/GGA0401_wreck/GGA0401_wreck_prop.bp', UseCustomMesh = true,
         EnergyMult = 0, HealthMult = 0.9, MassMult = 0.9, ReclaimTimeMultiplier = 1,
         WreckageLayers = { Land = true, Seabed = true, Sub = true, Water = true },
     },

@@ -318,3 +318,30 @@ HoverPeriodTicks=40 from main, including the scale conversion and bounded phase.
 The historical validation JSON above belongs to the original revisions; it is
 not a new validation run of this combined version. See the merge notes in
 ../../docs/VAEL_ITHA_WEAPON_REBUILD.md for the integration checks.
+
+
+## Local v7: selection and single-surface ring bores
+
+Local v7: Vael-Itha selection/ring repair. No GitHub publication.
+SelectionThickness 1.9 -> 0.25; selection dimensions unchanged.
+Removed duplicated bore walls from both hulls and ring shells. Single continuous army-colored cylindrical wall per ring, original 0.385 radius; protected from LOD decimation. Both native meshes retain exact skeleton/bind data. All other runtime files are unchanged from the prior local v6 snapshot.
+Actual native SCM ray checks: 768 rays total, each intersects one bore surface; baseline sample intersects multiple layers. Blueprint loads with Lua. No new FAF match has been run. Restart the game and verify selection and rings at different zoom levels.
+Pattern sheets are actual geometric projections for markup, plus a 360-degree cylindrical wall sheet. They are not a unique baked UV map: the model uses shared material tiles and geometric inlays. PNG and editable SVG included. Existing patterns remain unchanged.
+Install: replace the entire Project Roc Unicorns folder in FAF Mods with the folder from Project_Roc_Unicorns_LOCAL_v7.zip. Keep a backup of any personal changes. Disabled Vothuun remains disabled, previous T3 tank changes retained.
+
+Rebuild helper: fix_ring_bore.py called by generate_turret.py. Native repair/export: repair_and_export_rings.py. Checks: check_single_bore.py. Pattern authoring: make_pattern_sheets.py. Backups and validation: F:/FAF-Development/outputs/VaelItha_Selection_Ring_Fix_v7.
+
+
+## Local v9 — user-drawn patterns
+
+LOCAL v9 — Vael-Itha artist patterns, 2026-11-02
+
+Applied user petal/gondola sketches. All six petals (three primary and three secondary) retain their original motifs, with a perimeter inlay and 31 transverse hatch segments per petal. Hatches keep at least 0.035 model-unit centerline clearance from existing motifs. Outer gondola patterns replaced by clean circles, node connections and nested arrows; the two gondolas are mirrored. Inner lighting/panels remain and gain luminous perimeter contours. All new strokes use existing army-color material tiles; metal maps unchanged.
+
+Ring/crown ornament geometry is preserved (63 checked objects). Hull material underneath ring-face engraving is recessed so the whole face is exposed; functional ring radius 0.385 and the single luminous bore are retained. Both SCM LODs preserve the complete skeleton. Only two live turret SCM files changed in the runtime; all gameplay, DDS textures, icons, tank, selection correction and v8 death-cleanup skeletons are unchanged.
+
+Validation: both native LODs pass 436 ring-face visibility probes each and 192 inner-bore rays per ring. Exterior gondola pattern visibility sampled 356 times per LOD without obstruction. Hatching clearance checked in authoring projection. Native death cleanup regression passed for turret and tank. No post-change FAF match run. Native SCM previews approximate game shading and do not include particles.
+
+Install by replacing Project Roc Unicorns in FAF Mods with the complete folder from Project_Roc_Unicorns_LOCAL_v9.zip, then restart the game for a new test. Keep personal changes backed up. Everything is local; no upload to GitHub.
+
+Source: apply_artist_patterns.py (also called by generate_turret.py); build_artist_revision.py; refine_inner_contour.py; check_artist_revision.py; preview_artist_revision.py. Artist originals stored as petal_artist_reference_2026-11-02.png and gondola_artist_reference_2026-11-02.png. Crown means the central upper part of the foundation under the floating gun.

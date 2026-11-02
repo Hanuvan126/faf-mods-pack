@@ -12,7 +12,7 @@ def get_mesh_data(objects,decimate=False):
     for ob in objects:
         tmp=ob.copy();tmp.data=ob.data.copy();scene.collection.objects.link(tmp)
         for m in list(tmp.modifiers):tmp.modifiers.remove(m)
-        if decimate and len(tmp.data.polygons)>3 and not (ob.get('preserve_aperture') and ob.get('main_gondola')):
+        if decimate and len(tmp.data.polygons)>3 and not (ob.get('preserve_aperture') and (ob.get('main_gondola') or ob.get('ring_bore_single_surface'))):
             m=tmp.modifiers.new('Distant mesh reduction','DECIMATE');m.ratio=.38
         tmp.modifiers.new('Native triangle topology','TRIANGULATE')
         dep=bpy.context.evaluated_depsgraph_get();evaluated=tmp.evaluated_get(dep);me=evaluated.to_mesh();me.calc_loop_triangles()
