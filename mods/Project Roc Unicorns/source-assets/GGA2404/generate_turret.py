@@ -131,6 +131,12 @@ for ob in parts:
         ob['inward_roll_degrees']=-sign*90
 exec(compile((HERE.parent/'ring_gondolas.py').read_text(),str(HERE.parent/'ring_gondolas.py'),'exec'),globals())
 exec(compile((HERE.parent/'engraved_inlays.py').read_text(),str(HERE.parent/'engraved_inlays.py'),'exec'),globals())
+exec(compile((SRC/'fix_ring_bore.py').read_text(),str(SRC/'fix_ring_bore.py'),'exec'),globals())
+repair_ring_bores(parts,mesh)
+exec(compile((SRC/'apply_artist_patterns.py').read_text(),str(SRC/'apply_artist_patterns.py'),'exec'),globals())
+apply_artist_patterns(parts,mesh)
+exec(compile((SRC/'apply_lower_petals.py').read_text(),str(SRC/'apply_lower_petals.py'),'exec'),globals())
+apply_lower_petals(parts,mesh)
 # Move complete gondolas without narrowing their shells or changing the ring bore.
 # Ring-center separation: 1.60 -> 1.36, exactly 15 percent closer.
 GONDOLA_INSET=.12

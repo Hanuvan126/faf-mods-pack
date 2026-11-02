@@ -1,0 +1,18 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/mods/Project Roc Unicorns/props/GGA2404_wreck/GGA2404_wreck_lod0.scm',
+            AlbedoName = '/mods/Project Roc Unicorns/props/GGA2404_wreck/GGA2404_wreck_albedo.dds',
+            SpecularName = '/env/common/props/wreckage_noise.dds',
+            NormalsName = '/mods/Project Roc Unicorns/units/GGA2404/GGA2404_normalsTS.dds',
+            ShaderName = 'Wreckage', LODCutoff = 160,
+        },
+        {
+            MeshName = '/mods/Project Roc Unicorns/props/GGA2404_wreck/GGA2404_wreck_lod1.scm',
+            AlbedoName = '/mods/Project Roc Unicorns/props/GGA2404_wreck/GGA2404_wreck_albedo.dds',
+            SpecularName = '/env/common/props/wreckage_noise.dds',
+            NormalsName = '/mods/Project Roc Unicorns/units/GGA2404/GGA2404_normalsTS.dds',
+            ShaderName = 'Wreckage', LODCutoff = 700,
+        },
+    },
+}
