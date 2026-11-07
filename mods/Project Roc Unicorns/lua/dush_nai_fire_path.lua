@@ -1,5 +1,10 @@
--- Straight-shot terrain check and conservative blocked-target recovery.
-local function ClearToPoint(weapon, muzzle, target)
+-- Straight-shot terrain/wall clearance and visible alternate-target selection.
+local function SourceTarget(target)
+    if target and target.GetSource and not target:BeenDestroyed() then return target:GetSource() end
+    return target
+end
+
+local function ClearToPoint(weapon, muzzle, target, intendedTarget)
     local origin = weapon.unit:GetPosition(muzzle)
     local dx = target[1] - origin[1]
     local dy = target[2] - origin[2]
@@ -15,13 +20,50 @@ local function ClearToPoint(weapon, muzzle, target)
         local z = origin[3] + dz * t
         if GetTerrainHeight(x, z) > y + .03 then return false end
     end
+    -- Walls are units, not terrain. Test the complete 3-D segment against
+    -- their collision-height and horizontal volume. The intended wall target
+    -- is excluded so the player can destroy the wall itself.
+    local walls = GetUnitsInRect(Rect(math.min(origin[1],target[1])-2,
+        math.min(origin[3],target[3])-2, math.max(origin[1],target[1])+2,
+        math.max(origin[3],target[3])+2))
+    local length2 = dx*dx + dz*dz
+    for _, wall in ipairs(walls or {}) do
+        if wall ~= weapon.unit and wall ~= intendedTarget and not wall.Dead
+            and not wall:BeenDestroyed() and EntityCategoryContains(categories.WALL, wall) then
+            local pos = wall:GetPosition()
+            local bp = wall:GetBlueprint()
+            local wx = pos[1] + (bp.CollisionOffsetX or 0)
+            local wz = pos[3] + (bp.CollisionOffsetZ or 0)
+            local radius = math.max(bp.SizeX or 1, bp.SizeZ or 1) * .5 + .10
+            if length2 > .000001 then
+                local ox, oz = origin[1]-wx, origin[3]-wz
+                local dot = ox*dx+oz*dz
+                local discriminant = dot*dot-length2*(ox*ox+oz*oz-radius*radius)
+                if discriminant >= 0 then
+                    local half = math.sqrt(discriminant)
+                    local enter = math.max(.001,(-dot-half)/length2)
+                    local leave = math.min(.999,(-dot+half)/length2)
+                    local bottom = pos[2] + (bp.CollisionOffsetY or 0) - .10
+                    local top = bottom + (bp.SizeY or 1) + .20
+                    if math.abs(dy) < .000001 then
+                        if enter <= leave and origin[2] >= bottom and origin[2] <= top then return false end
+                    else
+                        local a, b = (bottom-origin[2])/dy, (top-origin[2])/dy
+                        enter = math.max(enter,math.min(a,b))
+                        leave = math.min(leave,math.max(a,b))
+                        if enter <= leave then return false end
+                    end
+                end
+            end
+        end
+    end
     return true
 end
 
 function IsClear(weapon, muzzle)
     if not weapon:WeaponHasTarget() then return true end
     local target = weapon:GetCurrentTargetPos()
-    return not target or ClearToPoint(weapon, muzzle, target)
+    return not target or ClearToPoint(weapon, muzzle, target, SourceTarget(weapon:GetCurrentTarget()))
 end
 
 local function KnownNow(unit, army)
@@ -74,6 +116,29 @@ function FindClearTarget(weapon, muzzle, rejected)
         return a.Id < b.Id
     end)
     for _, candidate in ipairs(candidates) do
-        if ClearToPoint(weapon, muzzle, candidate.Aim) then return candidate.Unit end
+        if ClearToPoint(weapon, muzzle, candidate.Aim, candidate.Unit) then return candidate.Unit end
     end
+end
+
+
+-- Read only the active order. Do not replace, clear or reorder player commands.
+local CommandTypes = import('/lua/sim/commands/shared.lua').UnitQueueDataToCommand
+function GetOrderedAttack(unit)
+    local queue = unit:GetCommandQueue()
+    local order = queue and queue[1]
+    local info = order and CommandTypes[order.commandType]
+    if not info or info.Type ~= 'Attack' then return nil end
+    local target = order.target
+    if target then
+        if target.Dead or target:BeenDestroyed() then return nil end
+        local pos = target:GetPosition()
+        return {pos[1], pos[2] + (target:GetBlueprint().SizeY or 1)*.5, pos[3]}, target
+    end
+    if order.targetId then return nil end -- a destroyed entity is not a ground attack
+    if order.x and order.y and order.z then return {order.x, order.y+.1, order.z} end
+end
+
+function OrderedAttackIsBlocked(weapon)
+    local aim, target = GetOrderedAttack(weapon.unit)
+    return aim and not ClearToPoint(weapon, 'MainMuzzle', aim, target) or false
 end
