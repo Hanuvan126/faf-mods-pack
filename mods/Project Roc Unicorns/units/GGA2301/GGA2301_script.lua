@@ -13,7 +13,7 @@ GGA2301 = Class(SStructureUnit) {
             if not unit:IsDead() then
                 animator:PlayAnim(unit:GetBlueprint().Display.AnimationIdle, true)
             end
-        end, self, self.PrismAnimator)
+        end, self.PrismAnimator)
     end,
 
     Weapons = {

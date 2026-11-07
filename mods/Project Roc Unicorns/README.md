@@ -78,6 +78,10 @@ The stock Seraphim T2 fabricator blueprint `XSB1104` is removed from the active 
 
 ## T3 point defense
 
+`GGA2302` **Sha'Veyr** is a separate T3 twin-comet defense with range 80.
+It is buildable by Seraphim T3 engineers and commanders; its projectile,
+effects, model and wreck are included. [Details](docs/ShaVeyr-GGA2302.md).
+
 Vothuun (`GGA2401`) has been removed. Its old archived blueprint under
 `source-assets/material-adjustment-2026-10-22/archive/units/` was also removed:
 FAF searches mod directories recursively for `.bp` files, including archives.

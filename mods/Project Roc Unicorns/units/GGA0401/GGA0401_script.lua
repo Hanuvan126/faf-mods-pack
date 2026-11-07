@@ -2,12 +2,22 @@ local HoverTank = import('/lua/seraphimunits.lua').SHoverLandUnit
 local SeraphimWeapons = import('/lua/seraphimweapons.lua')
 local PhasonCannon = SeraphimWeapons.SDFExperimentalPhasonProj
 local FirePath = import('/mods/Project Roc Unicorns/lua/dush_nai_fire_path.lua')
+local WeaponCallbacks = import('/lua/sim/weapon.lua').Weapon
 local ChargeAnimation = import('/mods/Project Roc Unicorns/lua/itha_yen_charge.lua')
 
 GGA0401 = ClassUnit(HoverTank) {
     OnStopBeingBuilt = function(self, builder, layer)
         HoverTank.OnStopBeingBuilt(self, builder, layer)
         ChargeAnimation.Initialize(self)
+        -- Unit-owned thread survives weapon state transitions. Original attack
+        -- commands remain in the engine queue, so native pathfinding routes around terrain.
+        self:ForkThread(function(unit)
+            local gun = unit:GetWeaponByLabel('MainGun')
+            while not unit.Dead and not unit:BeenDestroyed() do
+                gun:UpdateOrderedAttackPursuit()
+                WaitTicks(5)
+            end
+        end)
     end,
 
     OnKilled = function(self, instigator, damageType, overkillRatio)
@@ -22,14 +32,49 @@ GGA0401 = ClassUnit(HoverTank) {
 
     Weapons = {
         MainGun = ClassWeapon(PhasonCannon) {
+            UpdateOrderedAttackPursuit = function(self)
+                local blocked = FirePath.OrderedAttackIsBlocked(self)
+                if blocked and not self.OrderedAttackPursuit then
+                    self.OrderedAttackPursuit = true
+                    self.AttackRangeBeforePursuit = self:GetMaxRadius()
+                    -- A range-only engine attack otherwise stops at 80 even behind a ridge.
+                    -- Keep the gun enabled for the native attack mover, but suppress aim/fire.
+                    self:ChangeMaxRadius(1)
+                    self.FireClockEpoch = (self.FireClockEpoch or 0) + 1
+                    self.BlockedOnRelease = false
+                    ChangeState(self, self.OrderedAttackPursuitState)
+                elseif not blocked and self.OrderedAttackPursuit then
+                    self.OrderedAttackPursuit = false
+                    self:ChangeMaxRadius(self.AttackRangeBeforePursuit or self.Blueprint.MaxRadius)
+                    self.AttackRangeBeforePursuit = nil
+                    -- Clear LOS, Stop, Move, a new command, or target death restores normal behaviour.
+                    ChangeState(self, self.IdleState)
+                end
+            end,
+            OrderedAttackPursuitState = State {
+                StateName = 'OrderedAttackPursuitState',
+                WeaponWantEnabled = true,
+                WeaponAimWantEnabled = false,
+                Main = function(self)
+                    self.WeaponCanFire = false
+                    self.unit:SetBusy(false)
+                    self.unit:SetWorkProgress(1)
+                end,
+                -- Native OnLostTarget changes to Idle and re-enables aiming.
+                -- Swallow that state transition while preserving the engine notification.
+                OnLostTarget = function(self) WeaponCallbacks.OnLostTarget(self) end,
+                OnGotTarget = function(self) WeaponCallbacks.OnGotTarget(self) end,
+                OnFire = function(self) end,
+            },
             -- Engine callback: unlike suppressing a projectile after spawning,
             -- this keeps a blocked gun from starting another firing cycle.
             CanWeaponFire = function(self)
-                return PhasonCannon.CanWeaponFire(self) and FirePath.IsClear(self, 'MainMuzzle')
+                return not self.OrderedAttackPursuit and PhasonCannon.CanWeaponFire(self) and FirePath.IsClear(self, 'MainMuzzle')
             end,
             -- A target or the shooter can move during the charge.
             -- Recheck at release; no new projectile/damage if the path closes.
             CreateProjectileAtMuzzle = function(self, muzzle)
+                if self.OrderedAttackPursuit then return nil end
                 if not FirePath.IsClear(self, muzzle) then
                     self:CancelBlockedCycle()
                     return nil
@@ -51,6 +96,9 @@ GGA0401 = ClassUnit(HoverTank) {
             end,
             TerrainBlockedState = State {
                 StateName = 'TerrainBlockedState',
+                OnLostTarget = function(self) WeaponCallbacks.OnLostTarget(self) end,
+                OnGotTarget = function(self) WeaponCallbacks.OnGotTarget(self) end,
+                OnFire = function(self) end,
                 WeaponWantEnabled = false,
                 WeaponAimWantEnabled = false,
                 Main = function(self)
@@ -66,12 +114,23 @@ GGA0401 = ClassUnit(HoverTank) {
                         ChangeState(self, self.RetargetClearState)
                         return
                     end
-                    -- Native target acquisition is retried without polling a
-                    -- fake firing cycle or issuing/changing player orders.
-                    WaitTicks(10)
-                    if not self:BeenDestroyed() and not self.unit.Dead then
-                        self:ResetTarget()
-                        ChangeState(self, self.IdleState)
+                    -- Do not return to native acquisition every second and
+                    -- reacquire the same inaccessible enemy. Keep aiming off
+                    -- until the shooter moves, a wall falls, or another target
+                    -- gains a clear line. Player orders are not modified.
+                    while not self:BeenDestroyed() and not self.unit.Dead do
+                        WaitTicks(5)
+                        -- Respect a newly supplied clear entity/ground target.
+                        if self:WeaponHasTarget() and FirePath.IsClear(self, 'MainMuzzle') then
+                            ChangeState(self, self.RackSalvoFireReadyState)
+                            return
+                        end
+                        target = FirePath.FindClearTarget(self, 'MainMuzzle', nil)
+                        if target then
+                            self.ClearShotTarget = target
+                            ChangeState(self, self.RetargetClearState)
+                            return
+                        end
                     end
                 end,
             },
@@ -86,6 +145,31 @@ GGA0401 = ClassUnit(HoverTank) {
                         self:SetTargetEntity(target)
                     end
                     ChangeState(self, self.RackSalvoFireReadyState)
+                end,
+            },
+            -- The engine may never call OnFire when CanWeaponFire is false.
+            -- Check the target while ready, before starting any charge/clock.
+            RackSalvoFireReadyState = State(PhasonCannon.RackSalvoFireReadyState) {
+                Main = function(self)
+                    self.unit:SetBusy(false)
+                    self.WeaponCanFire = false
+                    if self.EconDrain then WaitFor(self.EconDrain) end
+                    self.WeaponCanFire = true
+                    local waited = 0
+                    while not self:BeenDestroyed() and not self.unit.Dead do
+                        WaitTicks(3)
+                        if self:WeaponHasTarget() and not FirePath.IsClear(self, 'MainMuzzle') then
+                            self.TerrainRejectedTarget = self:GetCurrentTarget()
+                            ChangeState(self, self.TerrainBlockedState)
+                            return
+                        end
+                        waited = waited + 3
+                        -- Preserve the native fallback for targets outside range.
+                        if waited >= math.ceil((1 / self.Blueprint.RateOfFire + 3) * 10) then
+                            self:ResetTarget()
+                            waited = 0
+                        end
+                    end
                 end,
             },
             RackSalvoFiringState = State(PhasonCannon.RackSalvoFiringState) {
