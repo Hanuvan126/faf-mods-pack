@@ -1,0 +1,7 @@
+MeshBlueprint {
+    IconFadeInZoom = 130,
+    LODs = {
+        { LODCutoff = 120, MeshName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_lod0.scm', AlbedoName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_albedo.dds', SpecularName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_specteam.dds', NormalsName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_normalsTS.dds', ShaderName = 'Insect' },
+        { LODCutoff = 250, MeshName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_lod1.scm', AlbedoName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_albedo.dds', SpecularName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_specteam.dds', NormalsName = '/mods/Project Roc Unicorns/units/GRB2401/GRB2401_normalsTS.dds', ShaderName = 'Insect' },
+    },
+}

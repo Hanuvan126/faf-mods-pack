@@ -184,3 +184,11 @@ MaxGroundVariation 1.1 (matching stock Seraphim T3 artillery), preserving the
 4x4 build skirt and all combat/model parameters. Water building remains disabled.
 This addresses a likely overstrict terrain-placement condition; new game
 placement verification is pending. Dush'Nai v4 updates remain included.
+
+## Cybran: Iron Nest
+
+`GRB2401` Iron Nest is an experimental **mobile land artillery unit** on four mechanical legs. Its maximum speed is **2.2**. The twin guns fire two resonance shells 1 second apart; `RateOfFire = 10/67` schedules a salvo approximately every **6.7 seconds**. Maximum / minimum range is **187.5 / 60**; each shell deals **2,500 damage** in radius **8**. Current cost is **9,000 mass / 110,000 energy / 8,000 build time**, with 22,000 health. It can be built by a Cybran T3 engineer or a Cybran ACU with T3 Engineering.
+
+The original model has a low sloped turret, long tapered guns, jointed clawed legs, and black metal panels with army-colour markings. Each barrel recoils and begins lowering immediately after its own shot, then returns during the reload. The shell uses the stock Cybran T2 artillery mesh at four times its original visual scale. Its walking animation uses a separate bone chain for each leg and excludes the turret. Source, material maps and exported-model views are in [source-assets/GRB2401](source-assets/GRB2401/). The build skirt is 8×8 around a 3×3 footprint with −2.5 offsets; the ghost-placement adjustment requires a new in-game check. Walking, firing and reload animations, projectile scale, placement, targeting, shell travel at maximum range, and M28AI behaviour still require verification in a FAF match.
+
+For development notes see [Cybran unit development](docs/CYBRAN_UNITS.md).

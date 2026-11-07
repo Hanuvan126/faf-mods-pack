@@ -1,0 +1,26 @@
+-- The mesh and behavior are the stock Gunther shell; only visual scale changes.
+ProjectileBlueprint {
+    Audio = {
+        Impact = Sound { Bank = 'Impacts', Cue = 'CYB_Expl_Med_Impact', LodCutoff = 'Weapon_LodCutoff' },
+        ImpactTerrain = Sound { Bank = 'Impacts', Cue = 'Impact_Land_Gen_CYBRAN', LodCutoff = 'Weapon_LodCutoff' },
+        ImpactWater = Sound { Bank = 'Impacts', Cue = 'Impact_Water_Splash_CYBRAN', LodCutoff = 'Weapon_LodCutoff' },
+    },
+    Categories = { 'CYBRAN', 'INDIRECTFIRE', 'PROJECTILE' },
+    Display = {
+        CameraFollowTimeout = 5, CameraFollowsProjectile = true,
+        ImpactEffects = { Type = 'Medium02' }, StrategicIconSize = 3,
+        -- Stock CIFMolecularResonanceShell01 uses 0.25.
+        UniformScale = 1.0,
+        Mesh = { LODs = {{
+            LODCutoff = 130,
+            ShaderName = 'TMeshNoNormals',
+            MeshName = '/projectiles/CIFMolecularResonanceShell01/CIFMolecularResonanceShell01_lod0.scm',
+            AlbedoName = '/projectiles/CIFMolecularResonanceShell01/CIFMolecularResonanceShell01_albedo.dds',
+            SpecularName = '/projectiles/CIFMolecularResonanceShell01/CIFMolecularResonanceShell01_SpecTeam.dds',
+            NormalsName = '/projectiles/CIFMolecularResonanceShell01/CIFMolecularResonanceShell01_normalsTS.dds',
+        }} },
+    },
+    General = { Category = 'Artillery', EntityCategory = { 'CYBRAN', 'PROJECTILE', 'INDIRECTFIRE' }, Faction = 'Cybran', TechLevel = 2 },
+    Interface = { HelpText = 0 },
+    Physics = { DestroyOnWater = true, LeadTarget = false, TurnRate = 360, VelocityAlign = true },
+}
