@@ -117,8 +117,7 @@ def rebuild():
     # These generators have the darker palette adjustment in their source.
     for unit, filename in [('GGA0101','launcher_geometry.py'),
                            ('GGA1401','reactor_geometry.py'),
-                           ('GGA2301','prism_reference_model.py'),
-                           ('GGA2401','artillery_geometry.py')]:
+                           ('GGA2301','prism_reference_model.py')]:
         src = ROOT / 'source-assets' / unit
         geom = module(src / filename, 'material_' + unit)
         geom.make_textures(src, ROOT/'units'/unit, save_dds)
@@ -137,7 +136,7 @@ def rebuild():
 
 
 def preview():
-    geom = module(ROOT/'source-assets/GGA2401/artillery_geometry.py', 'preview_geometry')
+    geom = module(ROOT/'source-assets/GGA2301/prism_reference_model.py', 'preview_geometry')
     # Reuse the established exported-mesh rasterizer with generic file lookup.
     # Lighting is approximate; game PBR/cubemaps and bloom require a match.
     source = inspect.getsource(geom.render_scm)
@@ -166,7 +165,7 @@ def preview():
                 old_bp = '\n'.join(p.read_text() for p in texture_folder.glob('*.bp'))
                 local_shader = 'Seraphim' if "ShaderName = 'Seraphim'" in old_bp else 'Unit'
             def lookup(path, level, texture_folder=texture_folder):
-                return load_mip(texture_folder / Path(path).name.replace('GGA2401_', prefix+'_'),level)
+                return load_mip(texture_folder / Path(path).name.replace('GGA2301_', prefix+'_'),level)
             namespace = dict(vars(geom), load_dds_mip=lookup, shader=local_shader)
             exec(source, namespace)
             output = HERE/f'{unit}_{column}.png'

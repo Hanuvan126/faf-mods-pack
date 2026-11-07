@@ -7,6 +7,13 @@ the sandbox unit-spawn menu: `gga0401`.
 
 ## Parameters
 
+Current weapon update, 7 November 2026: damage 2,000, `RateOfFire = 0.3`,
+charge 1 second and projectile speed 70. A separate GGP0401Fast projectile
+retains the phason sphere and impact effects and adds native Seraphim polytrails.
+The original projectile class remains shared with GGA2404. The table and
+historical descriptions below describe earlier versions. The new cycle and
+trail require verification in an actual FAF match.
+
 | Property | Initial value |
 | --- | --- |
 | Hull HP / regeneration | 8,000 / 20 HP/s |
@@ -25,8 +32,8 @@ the sandbox unit-spawn menu: `gga0401`.
 
 The main weapon is `UWRC_DirectFire`, `Direct Fire Experimental`, with
 `RULEUBA_None` and a `DIRECTFIRE` projectile. It has no artillery arc or missile
-tracking. Five seconds of projectile lifetime allow 175 units of unobstructed
-travel at speed 35, exceeding the current 80 range. Terrain can block it;
+tracking. Five seconds of projectile lifetime allow 350 units of unobstructed
+travel at speed 70, exceeding the current 80 range. Terrain can block it;
 vision is 50, so firing to maximum range requires spotting.
 
 The shield uses `PersonalShield = true`, not a spherical collision shield. FAF's

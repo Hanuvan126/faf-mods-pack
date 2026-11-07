@@ -91,13 +91,13 @@ of the exported SCM/SCA. This does not substitute for an engine match.
 | Parameter | Value |
 | --- | ---: |
 | Technology | Experimental (T4), no TECH3 category |
-| Energy production | 25,000/s |
-| Shield upkeep | 0; full 25,000/s remains available |
+| Energy production | 15,000/s |
+| Shield upkeep | 0; full 15,000/s remains available |
 | Hull | 24,000 HP |
 | Shield | 26,000 HP, size 12, vertical offset -2 |
 | Shield regeneration | 1,000 HP/s after 3 seconds without damage |
 | Shield recharge | 10 seconds after collapse, 5 after energy depletion |
-| Construction | 6,000 mass, 90,000 energy, 11,000 build points |
+| Construction | 12,500 mass, 90,000 energy, 11,000 build points |
 | Build skirt | 8×8, offsets -1.5/-1.5, same as XSB1301 |
 | Ground footprint | 5×5, same as XSB1301 |
 | Death behavior | Stock Othuy storm from Ythotha; no ordinary blast |
@@ -158,6 +158,6 @@ See `docs/M28AI_COMPATIBILITY.md`; actual AI construction is unverified.
 
 Status: exported files and software previews are checked separately from game
 behavior. No local match has been run for this unit. In game, verify construction
-menu visibility, 25,000/s economy increase, dome coverage/interception, toggle,
+menu visibility, 15,000/s economy increase, dome coverage/interception, toggle,
 recharge, animation, adjacency, Othuy release without an ordinary blast,
 unfinished-building destruction, safe reclaim and the game log.

@@ -1,0 +1,9 @@
+name = "Aeon Twin Missile Turret"
+uid = "aem-twin-missile-2301-0001-20261106"
+version = 1
+description = "Experimental T2 Aeon twin single-cell missile defense."
+author = "Local project; original assets: Gas Powered Games"
+selectable = true
+enabled = true
+exclusive = false
+ui_only = false

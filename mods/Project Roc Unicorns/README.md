@@ -1,25 +1,42 @@
 # Project Roc Unicorns
 
-This mod is a home for gameplay and balance changes to the Seraphim faction. It currently adds a compact, upgradeable T1 → T2 → T3 mass fabricator line, a T4 shielded power generator, one experimental hover assault tank, two Seraphim T3 artillery installations, a T3 point-defense turret, a T1 mobile missile launcher, and a prototype T2 mobile directional shield.
+This mod is a home for gameplay and balance changes to the Seraphim faction. It currently adds a compact, upgradeable T1 → T2 → T3 mass fabricator line, a T4 shielded power generator, one T2 hover assault tank, two Seraphim T3 artillery installations, a T3 point-defense turret, a T1 mobile missile launcher, and a prototype T2 mobile directional shield.
 
 `GGA0402` Itha-Suun and `GGA0403` Itha-Vael are included in the independent
 [Seraphim Additional Units](../seraphim-extra-units/README.md) mod on 25 October 2026.
 These two tanks are no longer included here. GGA2404 Vael-Itha remains in
 Project Roc Unicorns. Both mods can be enabled together.
 
-## Experimental hover assault tank
+## Aeon: Gemini missile defense
+
+`AEM2301` **Gemini** is a prototype T2 Aeon missile defense transferred from
+AeonMissileTurret. It retains its model, textures and weapon script:
+two missiles per salvo, 1,200 damage each, range 8–128, a nominal 10-second
+cycle between salvos, 1,800 health and a cost of
+3,000 mass / 22,000 energy / 1,600 build points. Its blueprint lists Aeon T2–T3
+engineers and appropriately upgraded commanders as builders. Balance is provisional.
+
+The model and textures derive from the stock UAB2101 by Gas Powered Games.
+The original sources, package notes and file validation are preserved in
+[source-assets/AEM2301](source-assets/AEM2301/). A build icon based on the model preview is included; there is no optimized LOD1. The transferred unit has not been tested in a
+match; construction, aiming, both muzzles, projectile flight and damage still
+need verification. M28AI selection is not established.
+
+## T2 hover assault tank
 
 `GGA0401` **Dush'Nai** replaces the original Itha-Yen model with an eight-petal
 hover hull and paired floating gondolas. It has reflective dark steel, army-color
 ornaments and fixed violet ring lining. Three native SCM LODs share a 33-bone
 rig. Its construction icon now depicts this model.
 
-One main gun fires the existing phason sphere at **80 range**, dealing **6,000
-damage** with **4 splash radius**, **3-second muzzle charge** and `RateOfFire =
-0.1`. The four inherited AA weapons and AA metadata are removed. Ground/water
-speed remains **3.6**, reverse **2.5**. Durability is **8,000 hull HP** plus a
-**32,000 HP personal shield**, regenerating **1,000 HP/s after 5 seconds**.
-Cost remains **32,000 mass / 480,000 energy / 52,000 build points**.
+One main gun fires a fast phason sphere with a Seraphim trail at **80 range**, dealing **2,000
+damage** with **4 splash radius**, **1-second muzzle charge** and `RateOfFire =
+0.3`. Projectile speed is **70**. The four inherited AA weapons and AA metadata are removed. Ground/water
+speed remains **3.6**, reverse **2.5**. Durability is **6,000 hull HP** plus a
+**14,000 HP personal shield**, regenerating **1,000 HP/s after 5 seconds**.
+It costs **4,800 mass / 60,000 energy / 4,000 build points** and is available
+to Seraphim T2 and T3 engineers and commanders with the corresponding engineering upgrade.
+These balance and T2 availability changes have not yet been tested in a match.
 
 After a shot the gondolas close, electrical links intensify, the original phason
 model grows between the rings and the gondolas reopen. A full sphere waits for a
@@ -35,7 +52,7 @@ instructions: [approved hover model](source-assets/GGA0401/approved-hover/README
 
 ## T4 experimental power generator
 
-`GGA1401` **Uya-Iava** produces **25,000 energy/s** and carries a **26,000 HP shield dome, size 12**, with no energy upkeep. Its hull has **24,000 HP**. It costs **6,000 mass / 90,000 energy / 11,000 build points**. It uses exactly the stock Seraphim T3 generator's **8×8 construction skirt**, **5×5 footprint** and skirt offsets. Build it with Seraphim T3 engineers or commanders with T3 engineering. Its original rounded metallic model has an open energy throat, five tall petals, eleven lower petals, six root pods and three orbiting Seraphim shards. Two fragments travel clockwise and one counterclockwise, viewed from above, with a 32-second orbital period. Player-color inlays, two SCM LODs, core rotation, vertical drift and a custom construction icon are included.
+`GGA1401` **Uya-Iava** produces **15,000 energy/s** and carries a **26,000 HP shield dome, size 12**, with no energy upkeep. Its hull has **24,000 HP**. It costs **12,500 mass / 90,000 energy / 11,000 build points**. It uses exactly the stock Seraphim T3 generator's **8×8 construction skirt**, **5×5 footprint** and skirt offsets. Build it with Seraphim T3 engineers or commanders with T3 engineering. Its original rounded metallic model has an open energy throat, five tall petals, eleven lower petals, six root pods and three orbiting Seraphim shards. Two fragments travel clockwise and one counterclockwise, viewed from above, with a 32-second orbital period. Player-color inlays, two SCM LODs, core rotation, vertical drift and a custom construction icon are included.
 
 The 2026-10-21 visual revisions replace the wide platter with a compact foundation and five tall, rounded swept petals like the stock T3 generator, then add two tiers of lower leaves and replace the floating calderas with closed, curved metallic shards. The 2026-10-22 addition places two more irregular islands above the crown: a central island spins clockwise in place once per 16 seconds, while a smaller satellite circles it counterclockwise once per 32 seconds, viewed from above. The original three orbiting shards remain. Visuals retain the stock XSB1301 ground-circle tarmac and `ST3PowerAmbient` rising light/ring/distortion effects, referenced directly from the game. Prior models are archived in the unit's source directory. Particle effects and orbital animation still require in-game verification.
 
@@ -49,35 +66,21 @@ Each tier uses its corresponding model set originally from `seraphim_t1_fabricat
 
 The T1 fabricator is buildable by Seraphim engineers at T1–T3 and by commanders only after they reach T2, following the Hydrocarbon Power Plant builder categories. T1 and T2 have `BuildRate = 10`, matching the Hydrocarbon upgrade example, so they can perform their own next-tier upgrades; T3 is the final tier.
 
-Costs are twice the matching Seraphim mass extractor's `BuildCostMass`, `BuildCostEnergy`, and `BuildTime` (build points). Energy upkeep follows the 150-energy-per-mass rate at each tier's full mass production:
+The build costs and build points for each tier are listed below. Energy upkeep follows the 150-energy-per-mass rate at each tier's full mass production:
 
 | Tier | Mass | Energy | Build points | Mass production | Energy consumption |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| T1 | 72 | 720 | 120 | 2/s | 300/s |
-| T2 | 1,800 | 10,800 | 1,800 | 6/s | 900/s |
-| T3 | 9,200 | 63,250 | 5,750 | 18/s | 2,700/s |
+| T1 | 36 | 360 | 60 | 2/s | 300/s |
+| T2 | 900 | 5,400 | 900 | 6/s | 900/s |
+| T3 | 4,600 | 31,625 | 2,875 | 18/s | 2,700/s |
 
 The stock Seraphim T2 fabricator blueprint `XSB1104` is removed from the active unit blueprint table. The stock T3 fabricator `XSB1303` remains available alongside the mod's custom T3 fabricator.
 
-## T3 rapid artillery
+## T3 point defense
 
-`GGA2401` is the T3 Vothuun Salvo Platform, buildable by Seraphim T3 engineers and upgraded commanders. It is a tall five-level tower of separate levitating islands above a five-petal foundation; each offset island carries one broad-breeched, split-leaf artillery cannon. The 2026-10-21 rebuild follows the user's corrected Seraphim style and inspection of stock XSB2301/XSB2303/XSB2401: continuous rounded surfaces, rolled armor edges and slightly brighter reflective steel replace the angular cut-metal look. Approved crop-circle engravings are preserved pixel for pixel. Materials now use the stock `Seraphim` shader with player color in Albedo.A and packed G/A normals, following `effects/mesh.fx`. Islands share yaw; each cannon elevates about its own rear hinge via the existing rotation slavers. The footprint remains 4×4. The unit has two SCM LODs, a 1024×1024 material atlas, and its unique 64×64 construction icon. [Stock-model findings](source-assets/GGA2401/stock-seraphim-study.md).
-
-The weapon uses the stock Seraphim T2 `XSB2303` artillery class and shell. The baseline was checked against the local FAF 3839 archives and upstream `develop`: T2 range is 115 and shell damage is 2,400. GGA2401 adds exactly 10 to each, for **125 range** and **2,410 damage per shell**. Minimum range 50, splash radius 3, low ballistic arc, normal artillery dispersion and friendly splash damage follow the T2 role; launch speed is 30 to accommodate the extra range.
-
-One shared weapon fires **10 sequential shells**, two from each launcher in order `1,1,2,2,3,3,4,4,5,5`. The interval is 0.2 seconds (two simulation ticks): first-to-last shell takes 1.8 seconds. `RateOfFire = 10/400` gives a nominal 40-second first-shot-to-first-shot cycle, with about 38 seconds between bursts, and `RenderFireClock = true` enables the same native reload bar as T2 artillery. Energy shortages and target acquisition can delay the next volley. No tenfold multiplication of the damage field is used: a complete volley deals 24,100 damage before splash, shields, dispersion and misses, or a nominal 602.5 sustained DPS.
-
-Starting balance: **14,250 HP**, **10,000 mass / 71,500 energy / 8,000 build points**, 28 vision, and **13,000 energy per complete volley**, charged at 650 energy/s. Cost, durability and construction time are five times the stock T2 installation, while the 40-second cycle gives roughly the sustained damage of five T2 guns concentrated into a burst. Balance is provisional. Veteran thresholds are also scaled by five.
-
-The previous weapon failed FAF's initialization rule: nonzero `RackRecoilDistance` cannot be combined with nonzero `MuzzleSalvoDelay`. Recoil is now zero; the stock weapon state machine handles the sequence, energy charge and cooldown. The user confirmed the firing mechanics work well before requesting this floating-island visual rebuild. The weapon blueprint, costs and combat statistics are retained. **The new tower and separate pitch hinges have not been tested in a match**; game verification is left to the user as requested. The existing optional M28AI role hook continues to classify this short-range T3 artillery with tactical/T2 artillery without falsifying its tech or size categories.
-
-Source and regeneration notes: [`source-assets/GGA2401/README.md`](source-assets/GGA2401/README.md).
-
-The 2026-10-21 black-body rendering defect was traced to DDS mip export: ordinary
-RGBA downsampling treated material masks as transparency and erased reflection
-data below mip0. Material channels now downsample independently; all eleven mip
-levels retain their data. Geometry, firing behavior and line-mask pixels are
-unchanged. The game-view preview now samples an exported DDS mip rather than PNGs.
+Vothuun (`GGA2401`) has been removed. Its old archived blueprint under
+`source-assets/material-adjustment-2026-10-22/archive/units/` was also removed:
+FAF searches mod directories recursively for `.bp` files, including archives.
 
 Adds `GGA2301`, a T3 direct-fire point-defense turret based on the stock Seraphim T2 `XSB2301` Uttaushala. Its Prism Spire model was rebuilt from the 2026-10-20 reference: six plated feet, three curved open frames, a floating double-point player-color crystal, an equatorial ring and a short beam lens. It has two mesh LODs and a 512×512 material atlas with polished silver armor, reflective gunmetal mechanisms, chrome borders and player-color lights/inlays. Paired flowing contours and nested oval markings follow the stock Seraphim material references; high SpecTeam reflection/specular values provide the metallic finish. A one-second activation gently opens the frames; idle slowly rotates and bobs the crystal. Decorative animations do not key the weapon's aiming or muzzle bones. The weapon keeps the stock ultrachromatic beam firing timing and sound cues. It is buildable by T3 Seraphim engineers and commanders, and has upgraded T3 durability and damage: 6,500 HP, 2,000 mass / 17,600 energy / 2,000 build-time cost, 24 vision, 60 range, and 175 beam damage. The rebuilt model still needs local-match visual and tracking confirmation.
 
@@ -89,7 +92,7 @@ with T3 engineering. Its model, textures, icons, projectiles, army-colored
 particle effects and authoring sources are all supplied here. The correction
 restores ownership and asset paths. Additional Units is not required.
 
-The optional M28AI hook classifies both GGA2401 and GGA2404 as tactical artillery,
+The optional M28AI hook classifies GGA2404 as tactical artillery,
 while retaining their real TECH3 categories. [Vael-Itha source and current
 parameters](source-assets/GGA2404/README.md) · [History](docs/VAEL_ITHA.md).
 The PR #3 integration replaces custom fire gating and unit-owned economy events
@@ -123,30 +126,18 @@ The baseline was checked against the local FAF `units.nx5` and upstream [UEF Par
 
 - `hook/lua/system/Blueprints.lua` — removes the stock T2 Seraphim fabricator blueprint; the stock T3 remains available.
 - `units/GGA1104`, `units/GGA1204`, `units/GGA1304` — new T1, T2, and T3 fabricator blueprints and scripts, with their model assets.
-- `units/GGA2301` — T3 Seraphim direct-fire point-defense blueprint, script, Prism Spire meshes, textures, and animations.
-- `units/GGA2401` — five-launcher T3 artillery blueprint, script, original meshes and textures.
+- `units/GGA2301` — Ishal-Thar point defense, model, textures and animations.
+- `source-assets/GGA2301` — Ishal-Thar source and generator.
 - `units/GGA2404`, `projectiles/GGP2404`, `projectiles/GGP2404Charge` — Vael-Itha artillery and its projectiles.
 - `effects/emitters/ball_*`, `textures/particles/ball_army_ramp.dds`, `lua/vael_itha_effects.lua` — Vael-Itha army-color lightning effects.
 - `units/GGA0101` — T1 mobile missile launcher blueprint, script, original meshes, textures and reload animation.
 - `props/GGA0101_wreck` — explicit reclaimable Thuunar wreck prop, damaged meshes and scorched texture.
 - `units/GGA0102` — T2 mobile shield blueprint, script, and custom shield mesh.
-- `icons/units/GGA*_icon.dds` and `textures/ui/common/icons/units/GGA*_icon.dds` — custom unit icons; `GGA2301` has its own transparent Ishal-Thar turret icon, while `GGA2401` has an original five-level shard-tower icon with transparent background.
+- `icons/units/GGA*_icon.dds` and `textures/ui/common/icons/units/GGA*_icon.dds` — custom unit icons.
 - `source-assets/GGA0101` — independent Thuunar model generator, editable OBJ, material sources, SCM previews and previous configuration archive.
 - `source-assets/GGA0102` — source geometry and generator for the custom shield panel.
-- `source-assets/GGA2301` — procedural model and animation generator for the Prism Spire turret.
-- `source-assets/GGA2401` — independent artillery model generator, editable OBJ, texture sources, exported-SCM previews and archived previous blueprint.
 
 ## Installation
-
-### Ishal-Thar — 25 October 2026
-
-`GGA2301` is now named **Ishal-Thar** in game. Its repainted dark silver/gunmetal
-atlas and native Seraphim shader replace the former pale Unit material; the
-player-color contours, nested oval markings, crystal and metallic shine remain.
-It has an original transparent build-menu icon in both FAF paths. Meshes,
-animations and combat values are unchanged. DDS mipmaps and SCM previews were
-checked; in-game appearance awaits a local match. Only the project working copy
-was updated. [Sources and previous-version backup](source-assets/GGA2301/README.md).
 
 ### Material adjustment — 22 October 2026
 
@@ -154,8 +145,7 @@ The custom unit hulls received darker materials to sit closer to stock
 Seraphim buildings: reduced albedo brightness and reflection, with metallic
 gloss and player-color details retained. GGA1104/GGA1204/GGA1304 receive original
 steel/gunmetal Seraphim textures, fine concentric inlays and the native Seraphim
-shader, keeping their meshes and animations. GGA2301's packed normal channels
-and independent material mipmaps are also corrected. The reused stock GGA0102
+shader, keeping their meshes and animations. The reused stock GGA0102
 hull is unchanged. [Sources, original-material backup and DDS/SCM comparisons](source-assets/material-adjustment-2026-10-22/README.md).
 File checks and rendered previews were performed; in-game appearance still
 needs confirmation in a new local match.
@@ -168,7 +158,7 @@ The original role audit used the locally installed M28AI v327. The T1 missile la
 shield is available from T2–T3 land factories. The existing fabricator and T3 point
 defense categories already match M28AI's economic and defensive filters.
 
-An optional hook in this mod classifies `GGA2401` and `GGA2404` as tactical artillery for M28AI,
+An optional hook in this mod classifies `GGA2404` as tactical artillery for M28AI,
 including its firebase/threat filters, while preserving its real T3 technology and
 size. M28AI's own files are not modified and it is not a required dependency.
 The stock AI's decisions about when to build units remain relevant: in particular,
@@ -187,8 +177,21 @@ placement verification is pending. Dush'Nai v4 updates remain included.
 
 ## Cybran: Iron Nest
 
-`GRB2401` Iron Nest is an experimental **mobile land artillery unit** on four mechanical legs. Its maximum speed is **2.2**. The twin guns fire two resonance shells 1 second apart; `RateOfFire = 10/67` schedules a salvo approximately every **6.7 seconds**. Maximum / minimum range is **187.5 / 60**; each shell deals **2,500 damage** in radius **8**. Current cost is **9,000 mass / 110,000 energy / 8,000 build time**, with 22,000 health. It can be built by a Cybran T3 engineer or a Cybran ACU with T3 Engineering.
+`GRB2401` Iron Nest is an experimental mobile Cybran artillery unit. It has **22,000 health**, **0.5 regeneration**, **50 vision**, and **2 movement speed**. It costs **11,000 mass / 340,000 energy / 8,000 build time** and can be built by a Cybran T3 engineer or a commander with T3 Engineering.
 
-The original model has a low sloped turret, long tapered guns, jointed clawed legs, and black metal panels with army-colour markings. Each barrel recoils and begins lowering immediately after its own shot, then returns during the reload. The shell uses the stock Cybran T2 artillery mesh at four times its original visual scale. Its walking animation uses a separate bone chain for each leg and excludes the turret. Source, material maps and exported-model views are in [source-assets/GRB2401](source-assets/GRB2401/). The build skirt is 8×8 around a 3×3 footprint with −2.5 offsets; the ghost-placement adjustment requires a new in-game check. Walking, firing and reload animations, projectile scale, placement, targeting, shell travel at maximum range, and M28AI behaviour still require verification in a FAF match.
+The twin guns fire **8,900 damage per shell** at **60–190 range**, with one second between guns and a **10-second** cycle between salvos. Turret yaw speed is **15 degrees/s** and `FiringRandomness = 1.5`, half the local Gunther's value of 3.0. Splash radius remains **8**. Four native footfall detectors use the `ExperimentalFootfall` damage type at **1,000 damage**, radius **1**. During the 3-second death animation the chassis drops and the legs spread; at 2.4 seconds a **4,500 damage**, radius **4** impact is applied. A fully healthy wreck created by native destruction rules has **15,000 mass**; normal FAF overkill and incomplete-build conditions still apply.
+
+The obstruction guard estimates a parabolic trajectory from the aimed direction and target, sampling terrain and testing visible hostile units' collision bounds. This is not the engine's own projectile simulation: it does not guarantee interception of every terrain feature, shield, prop, hidden object or moving target, and its behavior must be checked in a match. The model derives from the supplied SiegeWalker; source and preview files are in [source-assets/GRB2401](source-assets/GRB2401/). The footprint, selection indicator, movement, footfall, gun aiming, obstruction guard, fall damage, wreck creation and performance of the model still require in-game verification.
 
 For development notes see [Cybran unit development](docs/CYBRAN_UNITS.md).
+
+The 3 November tower revision stretches the shaft to twice its original height
+while retaining a rounded, attached crystal. Its round base now fits edge to
+edge within the 3×3 world-unit building square. Both LODs, the muzzle pivot,
+collision height and construction icons were updated. The exported meshes and
+preview were checked; the revised proportions and firing still need a match.
+
+
+## T2 experimental Cyclops
+
+`GGA0404` **Cyclops - Циклоп** is a Seraphim walking experimental built by T2/T3 engineers and commanders with matching engineering upgrades. It appears only in the T2 construction tab: it retains its experimental description but uses the TECH2 category without EXPERIMENTAL. It costs 4,999 mass, 22,000 energy and 6,000 build time; movement speed is 2.5 and its footprint and construction skirt are 3×3. Initial hull health is provisionally 6,000. Its central surface beam has range 30, 25 damage per simulation tick (nominally 250 per second), five seconds active and a nominal seven-second shot cycle. Each hand carries the stock Uyanah surface and anti-air lightning weapon settings. The imported GLB, converter, animation and previews are in [the source directory](source-assets/GGA0404/README.md). A user reported a freeze and a broken model during construction. The source was rebuilt with 28 bones (the local shader palette has 80) and inline mesh LOD metadata for the Seraphim construction effect. The revised version has not yet been verified in a match; walk, aiming, timing, construction and M28AI selection remain unverified.

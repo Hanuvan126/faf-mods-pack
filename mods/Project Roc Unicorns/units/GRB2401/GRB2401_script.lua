@@ -1,5 +1,6 @@
 local CWalkingLandUnit = import('/lua/cybranunits.lua').CWalkingLandUnit
 local CIFArtilleryWeapon = import('/lua/cybranweapons.lua').CIFArtilleryWeapon
+local FirePath = import('/mods/Project Roc Unicorns/lua/grb2401_fire_path.lua')
 GRB2401 = ClassUnit(CWalkingLandUnit) {
     -- Match the stock Megalith's directional walking animation behavior.
     OnMotionHorzEventChange = function(self, new, old)
@@ -12,6 +13,47 @@ GRB2401 = ClassUnit(CWalkingLandUnit) {
             end
         end
     end,
+    OnKilled = function(self, instigator, damageType, overkillRatio)
+        -- Stop live walking and firing controllers before the independent death animation.
+        if self.Animator then
+            self.Animator:Destroy()
+            self.Animator = nil
+        end
+        if self.GunRotators then
+            for _, side in { 'Left', 'Right' } do
+                self.GunRotators[side]:Destroy()
+                self.GunSlides[side]:Destroy()
+            end
+        end
+        CWalkingLandUnit.OnKilled(self, instigator, damageType, overkillRatio)
+    end,
+
+    OnAnimCollision = function(self, bone, x, y, z)
+        if not self.Dead then
+            CWalkingLandUnit.OnAnimCollision(self, bone, x, y, z)
+        end
+    end,
+
+    -- The native death weapon calls this once. Impact occurs as the hull
+    -- reaches the ground, 2.4 seconds into the three-second collapse.
+    DeathWeaponDamageThread = function(self, radius, damage, damageType, damageFriendly)
+        WaitTicks(24)
+        if not self:BeenDestroyed() then
+            DamageArea(self, self:GetPosition(), radius, damage, damageType, damageFriendly)
+            DamageArea(self, self:GetPosition(), radius, 1, 'TreeForce', false)
+        end
+    end,
+
+    -- Preserve the native overkill / build-completion rules for creating
+    -- a wreck, but give a created full-health wreck exactly 15,000 mass.
+    CreateWreckageProp = function(self, overkillRatio)
+        local wreck = CWalkingLandUnit.CreateWreckageProp(self, overkillRatio)
+        if wreck and not wreck:BeenDestroyed() then
+            wreck:SetMaxReclaimValues(wreck.TimeReclaim, 15000, 0)
+        end
+        return wreck
+    end,
+
     EnsureGunManips = function(self)
         if self.GunSlides then return end
         self.GunSlides = {}
@@ -58,7 +100,26 @@ GRB2401 = ClassUnit(CWalkingLandUnit) {
 
     Weapons = {
         MainGun = ClassWeapon(CIFArtilleryWeapon) {
+            -- Check the approximate ballistic corridor before starting a shot;
+            -- aiming remains enabled while waiting for a clear route.
+            CanWeaponFire = function(self)
+                if not CIFArtilleryWeapon.CanWeaponFire(self) then return false end
+                local tick = GetGameTick()
+                if not self.PathCheckTick or tick >= self.PathCheckTick then
+                    self.PathClear = FirePath.IsClear(self, 'Aim_Muzzle')
+                    self.PathCheckTick = tick + 5
+                end
+                return self.PathClear
+            end,
+            PlayFxMuzzleSequence = function(self, muzzle)
+                if FirePath.IsClear(self, muzzle) then
+                    CIFArtilleryWeapon.PlayFxMuzzleSequence(self, muzzle)
+                end
+            end,
             CreateProjectileAtMuzzle = function(self, muzzle)
+                -- Recheck because the shooter or obstacle may move between
+                -- the two shots. A blocked shot creates no projectile.
+                if not FirePath.IsClear(self, muzzle) then return nil end
                 local projectile = CIFArtilleryWeapon.CreateProjectileAtMuzzle(self, muzzle)
                 if projectile and not projectile:BeenDestroyed() then
                     local unit = self.unit

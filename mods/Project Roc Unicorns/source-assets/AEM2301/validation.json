@@ -1,0 +1,13 @@
+{
+  "vertices": 3548,
+  "triangles": 4480,
+  "bones": [
+    "Base",
+    "Turret",
+    "Barrel",
+    "MuzzleLeft",
+    "MuzzleRight"
+  ],
+  "checks": "SCM round-trip header, indices, bone assignments, DDS decode passed",
+  "in_game_tested": false
+}

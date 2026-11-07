@@ -1,0 +1,81 @@
+newmtl Armor
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 127
+map_Kd Armor_BaseColor.png
+
+newmtl ArmorLight
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 135
+map_Kd ArmorLight_BaseColor.png
+
+newmtl Edges
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 122
+map_Kd Edges_BaseColor.png
+
+newmtl Steel
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 162
+map_Kd Steel_BaseColor.png
+
+newmtl DarkMetal
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 122
+map_Kd DarkMetal_BaseColor.png
+
+newmtl Rust
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 49
+map_Kd Rust_BaseColor.png
+
+newmtl RedOxide
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 79
+map_Kd RedOxide_BaseColor.png
+
+newmtl Rubber
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 17
+map_Kd Rubber_BaseColor.png
+
+newmtl Brass
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 122
+map_Kd Brass_BaseColor.png
+
+newmtl Copper
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 97
+map_Kd Copper_BaseColor.png
+
+newmtl Cloth
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 27
+map_Kd Cloth_BaseColor.png
+
+newmtl Ivory
+Kd 1 1 1
+Ks .35 .35 .35
+Ns 105
+map_Kd Ivory_BaseColor.png
+
+newmtl Lens
+Kd 0.65 0.11 0.12
+Ks .35 .35 .35
+Ns 207
+
+newmtl Lamp
+Kd 0.87 0.87 0.69
+Ks .35 .35 .35
+Ns 205

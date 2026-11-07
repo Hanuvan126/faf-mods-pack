@@ -1,0 +1,21 @@
+MeshBlueprint {
+    IconFadeInZoom = 130,
+    LODs = {
+        {
+            LODCutoff = 160,
+            MeshName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_lod0.scm',
+            AlbedoName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_albedo.dds',
+            SpecularName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_specteam.dds',
+            NormalsName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_normalsTS.dds',
+            ShaderName = 'Aeon',
+        },
+        {
+            LODCutoff = 300,
+            MeshName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_lod1.scm',
+            AlbedoName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_albedo.dds',
+            SpecularName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_specteam.dds',
+            NormalsName = '/mods/Project Roc Unicorns/units/NSB2201/NSB2201_normalsTS.dds',
+            ShaderName = 'Aeon',
+        },
+    },
+}

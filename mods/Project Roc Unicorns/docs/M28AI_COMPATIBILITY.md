@@ -17,14 +17,13 @@ GGA0402 и GGA0403 находятся в [Seraphim Additional Units](../../serap
 | `gga1104` | T1 фабрикатор массы (`refCategoryMassFab`) | Инженеры T1–T3, командир с T2/T3 строительством | Уже корректны `STRUCTURE ECONOMIC MASSFABRICATION MASSPRODUCTION TECH1`; улучшение в `gga1204` |
 | `gga1204` | T2 фабрикатор массы (`refCategoryMassFab`) | Инженеры и командиры T2–T3 | Уже корректны экономические категории и `TECH2`; улучшение в `gga1304` |
 | `gga1304` | T3 фабрикатор массы (`refCategoryMassFab * TECH3`) | Инженеры и командиры T3 | Уже соответствует фильтру штатной задачи M28AI по строительству T3 фабрикаторов |
-| `gga2301` | T3 наземная точечная оборона (`refCategoryPD`, `refCategoryT3PD`) | Инженеры и командиры T3 | Уже корректны `STRUCTURE DEFENSE DIRECTFIRE TECH3` |
-| `gga2401` | T3 тактическая артиллерия с текущей дальностью 125, класс огневой поддержки (`refCategoryFixedT2Arti`) | Инженеры и командиры T3 | Реальные категории `STRUCTURE DEFENSE INDIRECTFIRE ARTILLERY TECH3 SIZE4` сохранены; роль уточняет хук |
+| `gga2301` | T3 наземная точечная оборона (`refCategoryPD`, `refCategoryT3PD`) | Инженеры и командиры T3 | Категории `STRUCTURE DEFENSE DIRECTFIRE TECH3` |
 | `gga2404` | T3 шаровая артиллерия (`refCategoryFixedT2Arti`) | Инженеры и командиры T3 | Собственные ресурсы в Rework; хук уточняет тактическую роль без подмены `TECH3` и `SIZE4` |
 
 
 `M28AI.refCategoryFixedT2Arti` — имя фильтра тактической артиллерии; в нём изначально
 предусмотрены и некоторые модовые T3 орудия. Использование этого фильтра не меняет
-технологический уровень `gga2401`: её по-прежнему строят только T3 строители.
+технологический уровень `gga2404`: её по-прежнему строят только T3 строители.
 
 `LAND` не добавлялся неподвижным фабрикаторам и оборонительным зданиям только ради
 ИИ: стандартные аналоги и соответствующие фильтры M28AI его не требуют. Для них
@@ -57,14 +56,9 @@ T2/T3; `BUILTBYTIER1FACTORY` удалён. Щит недоступен заво�
 
 ### Тактическая артиллерия T3
 
-Без хука M28AI относил `gga2401` к дальнобойным T3 орудиям по сочетанию
-`STRUCTURE INDIRECTFIRE ARTILLERY TECH3 - SIZE8`. Для дальности 70 это приводило
-к неподходящему стратегическому классу. Категория `SIZE8`, использованная M28AI
-для части других модов, не добавлялась как обходной путь к этому юниту размера 4.
-
 Хук [M28UnitInfo.lua](../hook/mods/M28AI/lua/AI/M28UnitInfo.lua):
 
-- включает `gga2401` и `gga2404` в `refCategoryFixedT2Arti`;
+- включает `gga2404` в `refCategoryFixedT2Arti`;
 - исключает её из `refCategoryFixedT3Arti`;
 - включает её в связанные фильтры `refCategoryFirebaseSuitable`
   и `refCategoryDangerousToLand`;

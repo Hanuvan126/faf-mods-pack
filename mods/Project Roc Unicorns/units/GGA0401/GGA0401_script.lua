@@ -27,7 +27,7 @@ GGA0401 = ClassUnit(HoverTank) {
             CanWeaponFire = function(self)
                 return PhasonCannon.CanWeaponFire(self) and FirePath.IsClear(self, 'MainMuzzle')
             end,
-            -- A target or the shooter can move during the native 3 s charge.
+            -- A target or the shooter can move during the charge.
             -- Recheck at release; no new projectile/damage if the path closes.
             CreateProjectileAtMuzzle = function(self, muzzle)
                 if not FirePath.IsClear(self, muzzle) then
@@ -91,7 +91,7 @@ GGA0401 = ClassUnit(HoverTank) {
             RackSalvoFiringState = State(PhasonCannon.RackSalvoFiringState) {
                 Main = function(self)
                     -- This is before native Main forks RenderClockThread,
-                    -- plays charge audio or sets up the three-second salvo.
+                    -- plays charge audio or starts the salvo.
                     -- WeaponHasTarget is an end-of-tick cache in moho. Let
                     -- a just-acquired target settle before the terrain guard.
                     if not self:WeaponHasTarget() then

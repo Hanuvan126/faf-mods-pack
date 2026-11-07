@@ -1,0 +1,10 @@
+{
+  "parts": 3546,
+  "triangles": 151302,
+  "materials": 14,
+  "textures": 12,
+  "units": "metres",
+  "up": "Y",
+  "forward": "+Z",
+  "animated": false
+}

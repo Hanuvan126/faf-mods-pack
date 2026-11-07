@@ -1,7 +1,7 @@
 name = "Seraphim Additional Units"
 uid = "e29909c6-41c4-4cb4-9da1-8d8482111ba1"
-version = 1
-description = "Additional Seraphim units: Itha-Suun and Itha-Vael experimental hover tanks."
+version = 2
+description = "Additional experimental units for Seraphim and Aeon, including the Halo Nest drone carrier."
 author = "Local project"
 selectable = true
 enabled = true

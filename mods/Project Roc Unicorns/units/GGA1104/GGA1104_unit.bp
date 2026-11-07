@@ -66,9 +66,9 @@ UnitBlueprint {
     },
     Economy = {
         BuildRate = 10,
-        BuildCostEnergy = 720,
-        BuildCostMass = 72,
-        BuildTime = 120,
+        BuildCostEnergy = 360,
+        BuildCostMass = 36,
+        BuildTime = 60,
         BuildableCategory = { 'gga1204' },
         MaintenanceConsumptionPerSecondEnergy = 300,
         ProductionPerSecondMass = 2,

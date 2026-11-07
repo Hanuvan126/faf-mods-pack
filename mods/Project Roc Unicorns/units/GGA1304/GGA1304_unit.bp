@@ -62,9 +62,9 @@ UnitBlueprint {
         UniformScale = 0.05,
     },
     Economy = {
-        BuildCostEnergy = 63250,
-        BuildCostMass = 9200,
-        BuildTime = 5750,
+        BuildCostEnergy = 31625,
+        BuildCostMass = 4600,
+        BuildTime = 2875,
         MaintenanceConsumptionPerSecondEnergy = 2700,
         ProductionPerSecondMass = 18,
         RebuildBonusIds = { 'gga1304' },

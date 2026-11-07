@@ -80,10 +80,10 @@ UnitBlueprint {
     Economy = {
         AdjacentStructureEnergyMod = -5,
         BuildCostEnergy = 90000,
-        BuildCostMass = 6000,
+        BuildCostMass = 12500,
         BuildTime = 11000,
         MaintenanceConsumptionPerSecondEnergy = 0,
-        ProductionPerSecondEnergy = 25000,
+        ProductionPerSecondEnergy = 15000,
         RebuildBonusIds = { 'gga1401' },
     },
     -- Match XSB1301's placement grid, ground footprint and skirt offsets exactly.

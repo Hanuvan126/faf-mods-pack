@@ -1,0 +1,22 @@
+{
+  "NEA0401": [
+    {
+      "vertices": 9960,
+      "triangles": 3320
+    },
+    {
+      "vertices": 7368,
+      "triangles": 2456
+    }
+  ],
+  "NEA0001": [
+    {
+      "vertices": 3048,
+      "triangles": 1016
+    },
+    {
+      "vertices": 2472,
+      "triangles": 824
+    }
+  ]
+}
