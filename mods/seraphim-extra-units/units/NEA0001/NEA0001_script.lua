@@ -1,10 +1,13 @@
 local Base = import('/lua/aeonunits.lua').AAirUnit
-local EnemyTargets = (categories.LAND + categories.AIR) - categories.UNTARGETABLE
+local EnemyTargets = (categories.LAND + categories.AIR + categories.STRUCTURE) - categories.UNTARGETABLE
+local ExplosionEffects = import('/lua/effecttemplates.lua').CMobileBeetleExplosion
 
 NEA0001 = ClassUnit(Base) {
     OnCreate = function(self)
         Base.OnCreate(self)
         self:SetUnSelectable(true)
+        self.Trash:Add(CreateAttachedEmitter(self, 0, self.Army,
+            '/effects/emitters/zapper_electricity_01_emit.bp'):ScaleEmitter(2))
     end,
 
     StartSwarm = function(self, carrier, slot)
@@ -60,27 +63,42 @@ NEA0001 = ClassUnit(Base) {
                 local p = target:GetPosition()
                 local me = self:GetPosition()
                 local dx, dy, dz = p[1] - me[1], p[2] - me[2], p[3] - me[3]
-                if dx * dx + dy * dy + dz * dz <= 9 then
+                -- Large structures can prevent the drone from reaching their
+                -- centre. Detonate near their collision footprint instead.
+                local proximity = 3
+                local height = 3
+                if EntityCategoryContains(categories.STRUCTURE, target) then
+                    local bp = target:GetBlueprint()
+                    proximity = math.max(bp.SizeX or 0, bp.SizeZ or 0) * 0.5 + 3
+                    height = (bp.SizeY or 0) * 0.5 + 3
+                end
+                if dx * dx + dz * dz <= proximity * proximity and math.abs(dy) <= height then
                     DamageArea(self, p, 3, 2000, 'Normal', false)
-                    CreateEmitterAtBone(self, -2, self.Army, '/effects/emitters/flash_03_emit.bp'):ScaleEmitter(1.2)
+                    for _, effect in ExplosionEffects do
+                        CreateEmitterAtBone(self, -2, self.Army, effect):ScaleEmitter(1.5)
+                    end
+                    CreateLightParticle(self, -1, self.Army, 8, 20, 'glow_03', 'ramp_antimatter_02')
                     self:Destroy()
                     return
                 end
                 self:SetElevation(math.max(1, p[2] - GetSurfaceHeight(p[1], p[3])))
                 IssueClearCommands({ self })
                 IssueMove({ self }, p)
+                WaitTicks(5)
             else
                 self:SetElevation(5)
-                -- 0.5 seconds per update; tangential speed stays below 3.
-                phase = phase + 1.2 / radius
-                local x = center[1] + radius * math.cos(phase)
-                local z = center[3] + radius * math.sin(phase)
+                -- Give the navigator time to start moving and aim ahead on
+                -- the orbit instead of repeatedly issuing nearly identical goals.
+                phase = phase + 2.4 / radius
+                local goalPhase = phase + math.pi / 3
+                local x = center[1] + radius * math.cos(goalPhase)
+                local z = center[3] + radius * math.sin(goalPhase)
                 x = math.max(0, math.min(ScenarioInfo.size[1] - 1, x))
                 z = math.max(0, math.min(ScenarioInfo.size[2] - 1, z))
                 IssueClearCommands({ self })
                 IssueMove({ self }, { x, GetSurfaceHeight(x, z), z })
+                WaitTicks(10)
             end
-            WaitTicks(5)
         end
     end,
 }

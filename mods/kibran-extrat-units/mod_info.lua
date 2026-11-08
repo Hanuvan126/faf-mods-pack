@@ -1,0 +1,9 @@
+name = 'Kibran Extrat Units'
+uid = 'dc133c9a-0ed8-43b2-8206-703bf9f250b2'
+version = 1
+description = 'Experimental Cybran mobile engineering station.'
+author = 'Nestr'
+selectable = true
+enabled = true
+exclusive = false
+ui_only = false

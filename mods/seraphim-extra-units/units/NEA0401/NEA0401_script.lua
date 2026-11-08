@@ -3,6 +3,9 @@ local Base = import('/lua/aeonunits.lua').AShieldHoverLandUnit
 NEA0401 = ClassUnit(Base) {
     OnStopBeingBuilt = function(self, builder, layer)
         Base.OnStopBeingBuilt(self, builder, layer)
+        -- The live electrical arcs follow the crystal's bone as the tank turns.
+        self.Trash:Add(CreateAttachedEmitter(self, 'Crystal', self.Army,
+            '/effects/emitters/zapper_electricity_01_emit.bp'):ScaleEmitter(3))
         self.Swarm = {}
         self:ForkThread(self.SwarmProductionThread)
     end,
