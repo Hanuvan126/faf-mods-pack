@@ -1,0 +1,10 @@
+name = "M28AI Fix for errors"
+uid = "9d01a7e4-fb5a-4b12-a852-348623cbe081-v1"
+version = 1
+description = "Avoids invalid M28AI missile-dodge waits for zero-speed projectile blueprints."
+author = "nestrik"
+selectable = true
+enabled = true
+exclusive = false
+ui_only = false
+after = { "fnewm028-v328-55b4-92b6-64398e7ge43f" }
