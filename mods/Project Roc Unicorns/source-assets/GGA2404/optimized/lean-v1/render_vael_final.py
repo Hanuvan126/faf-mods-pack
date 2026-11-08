@@ -9,5 +9,3 @@ for folder,lod in [('runtime',0),('runtime',1)]:
  for view,az,el in [('perspective',35,24),('top',35,65)]:
   render_scm(OUT/f'{folder}/GGA2404_lod{lod}.scm',SRC,OUT/f'checked_{folder}_{lod}_{view}.png',az,el,(.4,.12,.85),800,runtime_textures=True)
   print(folder,lod,view,flush=True)
-
-

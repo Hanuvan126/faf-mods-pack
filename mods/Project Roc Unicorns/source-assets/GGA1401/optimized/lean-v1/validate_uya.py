@@ -29,4 +29,3 @@ for suffix in ['albedo','specteam','normalsTS']:
 report['bone_records_unchanged']=True
 report['game_tested']=False
 (OUT/'validation.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
-

@@ -11,7 +11,7 @@ fx=exp[exp.index('function CreateWreckageEffects(unit, prop)'):exp.index('\n----
 start=unit.index('    DestroyUnit = function(self, overkillRatio)');end=unit.index('\n    end,',start)+len('\n    end')
 destroy='DestroyUnit = '+unit[start:end].split('=',1)[1]
 results=[]
-for uid in ['GGA2404','GGA0401']:
+for uid in ['GGA2404']:
  live=bones(MOD/f'units/{uid}/{uid}_lod0.scm')
  for lod in [0,1]:
   dead=bones(MOD/f'props/{uid}_wreck/{uid}_wreck_lod{lod}.scm')

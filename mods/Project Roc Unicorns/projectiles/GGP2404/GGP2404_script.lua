@@ -1,4 +1,4 @@
-local TankProjectile = import('/mods/Project Roc Unicorns/projectiles/GGP0401/GGP0401_script.lua').GGP0401
+local TankProjectile = import('/mods/Project Roc Unicorns/lua/vael_itha_phason_base.lua').GGP0401
 local Entity = import('/lua/sim/entity.lua').Entity
 local Visuals = import('/mods/Project Roc Unicorns/lua/vael_itha_effects.lua')
 local FX = '/mods/Project Roc Unicorns/effects/emitters/'

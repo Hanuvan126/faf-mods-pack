@@ -39,4 +39,3 @@ for o in bpy.context.scene.objects:
    uv.data[lid].uv=(u,1-v)
 bpy.ops.wm.save_as_mainfile(filepath=str(p/'IshalThar_v10.blend'))
 print('EDITABLE_BLEND_UPDATED')
-

@@ -1,0 +1,24 @@
+UnitBlueprint {
+    Description = 'Experimental Mobile Satellite Platform',
+    Categories = { 'AMPHIBIOUS', 'BUILTBYTIER3COMMANDER', 'BUILTBYTIER3ENGINEER', 'CQUEMOV', 'DRAGBUILD', 'EXPERIMENTAL', 'LAND', 'MOBILE', 'NEEDMOBILEBUILD', 'PRODUCTFA', 'RECLAIMABLE', 'SELECTABLE', 'UEF', 'VISIBLETORECON' },
+    Defense = { ArmorType = 'Experimental', Health = 12500, MaxHealth = 12500, RegenRate = 20, SurfaceThreatLevel = 200 },
+    Display = { MeshBlueprint = '/units/uel0401/uel0401_mesh', UniformScale = 0.215 },
+    Economy = { BuildCostEnergy = 700000, BuildCostMass = 42000, BuildTime = 80000 },
+    General = {
+        CommandCaps = { RULEUCC_Move = true, RULEUCC_Stop = true, RULEUCC_Patrol = true, RULEUCC_Guard = true },
+        FactionName = 'UEF', Icon = 'amph', UnitName = 'Argus',
+    },
+    Intel = { VisionRadius = 32, WaterVisionRadius = 32 },
+    Physics = {
+        BackUpDistance = 30, BankingSlope = 3, DragCoefficient = 0.2, Elevation = 1,
+        LayerChangeOffsetHeight = -0.75, MaxAcceleration = 1.75, MaxBrake = 1.75,
+        MaxSpeed = 1.75, MaxSpeedReverse = 1.75, MaxSteerForce = 1000,
+        MeshExtentsX = 8, MeshExtentsY = 2, MeshExtentsZ = 10.5,
+        MotionType = 'RULEUMT_Amphibious', RotateBodyWhileMoving = false,
+        RotateOnSpot = false, RotateOnSpotThreshold = 0.5,
+        SkirtSizeX = 9, SkirtSizeZ = 9, TurnRadius = 0, TurnRate = 30,
+    },
+    SelectionSizeX = 4, SelectionSizeZ = 5.25, SizeX = 5.2, SizeY = 1.4, SizeZ = 7.5,
+    StrategicIconName = 'icon_experimental_generic',
+    Wreckage = { Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp', HealthMult = 0.9, MassMult = 0.9, ReclaimTimeMultiplier = 1, WreckageLayers = { Land = true, Seabed = true, Water = true } },
+}

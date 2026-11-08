@@ -44,4 +44,3 @@ if np.dot(np.cross(v0[1]-v0[0],v0[2]-v0[0]),v0.mean(0))<0:
 write_scm(SimpleNamespace(vertices=vs,indices=ix),pr/'GGP2301_lod0.scm',['GGP2301'],[-1],[(0,0,0)])
 for name,color in [('albedo',(225,210,255,0)),('specteam',(80,120,255,0)),('normalsTS',(128,128,255,128))]:save_dds_dxt5(Image.new('RGBA',(32,32),color),pr/f'GGP2301_{name}.dds',independent_channels=True)
 print('PACKED',stage)
-

@@ -42,6 +42,22 @@ It also does not simulate the live particle emitters. When the local base-game
 decal beneath the exported SCM for layout inspection, reading its DDS directly
 from that archive without extracting it into the mod.
 
+## Geometry optimization (2026-11-08)
+
+The current LOD0 was reduced from 43,476 vertices / 25,912 triangles to
+30,886 / 18,368; LOD1 from 25,414 / 14,552 to 20,158 / 11,564. The procedural
+builder uses fewer sections, and thin tubes have fewer sides in LOD1. Rounded
+surfaces, player-colour lines, materials and all seven animation bones remain.
+`rebuild_optimized_meshes.py` regenerates only the meshes, editable OBJ and
+SCM-based preview images, without replacing the current textures, animation,
+blueprint or icon. The pre-optimization meshes and source are in
+`archive/before-geometry-optimization-2026-11-08/`.
+
+SCM indices, finite vertex values, bone data and bounds were checked. Front,
+side, game-angle and LOD1 previews were rendered from the exported files. The
+older `export_findings.json` and older previews describe the previous build.
+Actual appearance, animation and performance have not been tested in FAF.
+
 The version before this shape correction is preserved in
 `archive/before-generator-shape-2026-10-21/`, including the old runtime files and
 source scripts. `reference-stock-comparison.png` is the user's in-game comparison.

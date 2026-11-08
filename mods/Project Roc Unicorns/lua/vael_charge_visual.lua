@@ -1,7 +1,7 @@
 -- Visual-only charge display. Native weapon owns firing and energy consumption.
 local Entity = import('/lua/sim/Entity.lua').Entity
 local OrbTrails = import('/lua/effecttemplates.lua').SDFExperimentalPhasonProjFXTrails01
-local Mesh = '/mods/Project Roc Unicorns/effects/entities/DushNaiCharge/DushNaiCharge_mesh'
+local Mesh = '/mods/Project Roc Unicorns/effects/entities/VaelCharge/VaelCharge_mesh'
 local Beams = {
     '/mods/Project Roc Unicorns/effects/emitters/itha_yen_charge_beam_emit.bp',
     '/mods/Project Roc Unicorns/effects/emitters/itha_yen_charge_core_beam_emit.bp',

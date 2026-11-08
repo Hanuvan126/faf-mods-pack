@@ -2,7 +2,7 @@ import bpy,struct
 from pathlib import Path
 from mathutils import Vector
 r=Path('F:/FAF-Development');m=r/'work/faf-upload/mods/Project Roc Unicorns';out=r/'outputs/Local_T3_Massive_Wrecks_v6'
-for unit,scale in [('GGA0401',.1),('GGA2404',.05)]:
+for unit,scale in [('GGA2404',.05)]:
  bpy.ops.wm.read_factory_settings(use_empty=True);s=bpy.context.scene;s.world=bpy.data.worlds.new('World');s.world.color=(.16,.16,.16)
  raw=(m/f'props/{unit}_wreck/{unit}_wreck_lod0.scm').read_bytes();h=struct.unpack_from('<4s11I',raw)
  v=[struct.unpack_from('<16f4B',raw,h[4]+i*68) for i in range(h[6])];ix=struct.unpack_from('<'+'H'*h[8],raw,h[7]);faces=[ix[i:i+3] for i in range(0,len(ix),3)]

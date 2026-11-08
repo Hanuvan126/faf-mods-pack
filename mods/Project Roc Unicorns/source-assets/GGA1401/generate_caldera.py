@@ -97,7 +97,8 @@ def tube(m, points, radius, bone=0, material='team'):
         u=np.cross(direction,(0,0,1))
         if np.linalg.norm(u)<.01: u=np.cross(direction,(1,0,0))
         u/=np.linalg.norm(u); v=np.cross(direction,u)
-        rings.append([p+radius*(u*math.cos(a)+v*math.sin(a)) for a in np.linspace(0,2*math.pi,8,endpoint=False)])
+        sides = 8 if m.detail >= 24 else 5
+        rings.append([p+radius*(u*math.cos(a)+v*math.sin(a)) for a in np.linspace(0,2*math.pi,sides,endpoint=False)])
     m.loft(rings,points,bone,material)
 
 
@@ -278,7 +279,7 @@ def build_mesh(detail):
 def main(rebuild_textures=True):
     UNIT.mkdir(parents=True,exist_ok=True)
     stats={}
-    for lod,detail in [(0,32),(1,16)]:
+    for lod,detail in [(0,28),(1,12)]:
         m=build_mesh(detail)
         write_scm(m,UNIT/f'GGA1401_lod{lod}.scm',NAMES,PARENTS,PIVOTS)
         if lod==0: export_obj(m,ASSETS,NAMES)

@@ -14,4 +14,3 @@ for suffix in ['albedo','specteam','normalsTS']:
  original=Image.open(OUT/f'original/GGA1401_{suffix}.dds').convert('RGBA')
  im=Image.merge('RGBA',tuple(c.resize((512,512),Image.Resampling.LANCZOS) for c in original.split()))
  dds(im,OUT/f'runtime/GGA1401_{suffix}.dds')
-

@@ -1,7 +1,7 @@
 name = "Seraphim Additional Units"
 uid = "e29909c6-41c4-4cb4-9da1-8d8482111ba1"
 version = 2
-description = "Additional experimental units for Seraphim and Aeon, including the Halo Nest drone carrier."
+description = "Additional experimental units for Seraphim."
 author = "Local project"
 selectable = true
 enabled = true

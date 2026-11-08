@@ -9,46 +9,24 @@ Project Roc Unicorns. Both mods can be enabled together.
 
 ## Aeon: Gemini missile defense
 
-`AEM2301` **Gemini** is a prototype T2 Aeon missile defense transferred from
+`AEM2301` **Gemini** is a prototype T3 Aeon missile defense transferred from
 AeonMissileTurret. It retains its model, textures and weapon script:
-two missiles per salvo, 1,200 damage each, range 8–128, a nominal 10-second
+two missiles per salvo, 2,400 damage each with a splash radius of 2, range 8–136, a nominal 10-second
 cycle between salvos, 1,800 health and a cost of
-3,000 mass / 22,000 energy / 1,600 build points. Its blueprint lists Aeon T2–T3
+3,000 mass / 22,000 energy / 1,600 build points. Its blueprint lists Aeon T3
 engineers and appropriately upgraded commanders as builders. Balance is provisional.
+
+Its game LOD0 uses the 3,000-triangle optimized mesh, retaining the original
+five-bone skeleton and muzzle positions. The original SCM and conversion script
+are archived under `source-assets/AEM2301`. The model is scaled to 156% of its original size and uses
+an Aeon ground decal; the 1×1 footprint is unchanged. These changes still require
+in-game checks, especially aiming and ground-decal placement.
 
 The model and textures derive from the stock UAB2101 by Gas Powered Games.
 The original sources, package notes and file validation are preserved in
 [source-assets/AEM2301](source-assets/AEM2301/). A build icon based on the model preview is included; there is no optimized LOD1. The transferred unit has not been tested in a
 match; construction, aiming, both muzzles, projectile flight and damage still
 need verification. M28AI selection is not established.
-
-## T2 hover assault tank
-
-`GGA0401` **Dush'Nai** replaces the original Itha-Yen model with an eight-petal
-hover hull and paired floating gondolas. It has reflective dark steel, army-color
-ornaments and fixed violet ring lining. Three native SCM LODs share a 33-bone
-rig. Its construction icon now depicts this model.
-
-One main gun fires a fast phason sphere with a Seraphim trail at **80 range**, dealing **2,000
-damage** with **4 splash radius**, **1-second muzzle charge** and `RateOfFire =
-0.3`. Projectile speed is **70**. The four inherited AA weapons and AA metadata are removed. Ground/water
-speed remains **3.6**, reverse **2.5**. Durability is **6,000 hull HP** plus a
-**14,000 HP personal shield**, regenerating **1,000 HP/s after 5 seconds**.
-It costs **4,800 mass / 60,000 energy / 4,000 build points** and is available
-to Seraphim T2 and T3 engineers and commanders with the corresponding engineering upgrade.
-These balance and T2 availability changes have not yet been tested in a match.
-
-After a shot the gondolas close, electrical links intensify, the original phason
-model grows between the rings and the gondolas reopen. A full sphere waits for a
-target. A blocked terrain corridor is rejected before the native salvo/clock;
-the weapon searches actively known enemies with clear paths using its original
-priorities. A path closing during charge cancels discharge and its clock. No
-player orders, vision radius or projectile damage behavior are changed.
-
-User checks confirm building, movement, firing, accepted charge animation and
-AA removal. Latest blocked-target/progress recovery and the new icon have file
-and mocked-state checks, with fresh match verification pending. Source/rebuild
-instructions: [approved hover model](source-assets/GGA0401/approved-hover/README.md).
 
 ## T4 experimental power generator
 
@@ -78,10 +56,6 @@ The stock Seraphim T2 fabricator blueprint `XSB1104` is removed from the active 
 
 ## T3 point defense
 
-`GGA2302` **Sha'Veyr** is a separate T3 twin-comet defense with range 80.
-It is buildable by Seraphim T3 engineers and commanders; its projectile,
-effects, model and wreck are included. [Details](docs/ShaVeyr-GGA2302.md).
-
 Vothuun (`GGA2401`) has been removed. Its old archived blueprint under
 `source-assets/material-adjustment-2026-10-22/archive/units/` was also removed:
 FAF searches mod directories recursively for `.bp` files, including archives.
@@ -102,7 +76,7 @@ parameters](source-assets/GGA2404/README.md) · [History](docs/VAEL_ITHA.md).
 The PR #3 integration replaces custom fire gating and unit-owned economy events
 with native Phason charging and fire-ready states. The first 2,000-energy charge
 starts after construction without a target; independent gondola/charge visuals
-cannot block firing. Charge and flight reuse this mod's GGP0401 sphere, trails and
+cannot block firing. Charge and flight use this mod's independent phason sphere, trails and
 impacts at half scale. High arc, range 35–150, combat values, dark DDS/SCM and the
 three-second ground-lightning hazard are retained. The October 25 continuous
 hover repair (±0.08 game units over four seconds) is preserved. During shortages
@@ -177,11 +151,13 @@ Local v5 land-placement adjustment for Vael-Itha GGA2404: LAND category and
 MaxGroundVariation 1.1 (matching stock Seraphim T3 artillery), preserving the
 4x4 build skirt and all combat/model parameters. Water building remains disabled.
 This addresses a likely overstrict terrain-placement condition; new game
-placement verification is pending. Dush'Nai v4 updates remain included.
+placement verification is pending.
 
 ## Cybran: Iron Nest
 
 `GRB2401` Iron Nest is an experimental mobile Cybran artillery unit. It has **22,000 health**, **0.5 regeneration**, **50 vision**, and **2 movement speed**. It costs **11,000 mass / 340,000 energy / 8,000 build time** and can be built by a Cybran T3 engineer or a commander with T3 Engineering.
+
+Its weapon uses FAF's automatic targeting priorities, preferring land mobile units and retaining other valid surface targets. Its firing range remains 60–190; targets must be detected and the obstruction guard can block a shot. The collision box uses the stock Monkeylord's dimensions and vertical offset, while footfall damage remains active. This smaller box also changes where projectiles can hit; movement through small units and targeting require in-game verification.
 
 The twin guns fire **8,900 damage per shell** at **60–190 range**, with one second between guns and a **10-second** cycle between salvos. Turret yaw speed is **15 degrees/s** and `FiringRandomness = 1.5`, half the local Gunther's value of 3.0. Splash radius remains **8**. Four native footfall detectors use the `ExperimentalFootfall` damage type at **1,000 damage**, radius **1**. During the 3-second death animation the chassis drops and the legs spread; at 2.4 seconds a **4,500 damage**, radius **4** impact is applied. A fully healthy wreck created by native destruction rules has **15,000 mass**; normal FAF overkill and incomplete-build conditions still apply.
 
@@ -194,3 +170,30 @@ while retaining a rounded, attached crystal. Its round base now fits edge to
 edge within the 3×3 world-unit building square. Both LODs, the muzzle pivot,
 collision height and construction icons were updated. The exported meshes and
 preview were checked; the revised proportions and firing still need a match.
+
+## Halo Nest и рой
+
+
+Halo Nest имеет продольную гондолу, семь боковых и носовых сфер и кристалл с
+электрическими разрядами. У него 8 000 здоровья и купольный щит на 30 000 здоровья;
+перезарядка разрушенного щита занимает 20 секунд, потребление энергии — 900/с.
+Стоимость — 15 000 массы, 275 000 энергии и 42 000 единиц времени постройки.
+Он автоматически выпускает бесплатно по одному дрону за 3 секунды, до 20
+одновременно, и восполняет потери. Дроны обладают 150 здоровья и максимальной скоростью
+24, ищут обнаруженные наземные, воздушные цели и здания в радиусе 35 от танка, преследуют их и при сближении
+взрываются на 2000 урона с радиусом 3. Без цели они направляются по круговым
+траекториям радиусом от 3 до 12 вокруг танка. Точки орбиты обновляются каждую секунду и расположены впереди по окружности,
+чтобы дроны могли начать движение и следовать за танком. При гибели носителя рой исчезает.
+Дроны выглядят как шаровые молнии с электрическими искрами. Их выделение отключено;
+они сохраняют воздушную категорию и уязвимость. Визуальный взрыв усилен,
+урон и радиус урона не изменены. Ускорение и поворот заданы высокими значениями;
+максимально допустимые значения движка не установлены.
+Выпуск, дальность поиска и баланс танка являются начальными настройками.
+
+Модели созданы в `source-assets/NEA0401`, игровые SCM и карты находятся
+в соответствующих папках `units`. Фактическая форма траекторий зависит от
+навигации, скорости дронов и движения танка. Модели и логика ещё не проверены
+в игре: в частности, нужны проверка атаки воздушных целей, ПВО, строительства,
+передачи и уничтожения танка, купола и поведения M28AI. Категории строителей
+сверены с локальными blueprint Aeon; реальный `CanBuild` в матче не проверен.
+Танк без стандартного оружия не обязательно будет выбран M28AI как боевой юнит.

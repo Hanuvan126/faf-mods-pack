@@ -17,4 +17,3 @@ for sec in [0,8,16,24]:
 sheet=Image.new('RGB',(1760,440))
 for i,im in enumerate(frames):sheet.paste(im,(440*i,0))
 sheet.save(OUT/'animation_phases.png')
-
