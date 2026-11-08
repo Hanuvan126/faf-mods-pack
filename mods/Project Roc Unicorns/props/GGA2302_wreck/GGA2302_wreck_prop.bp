@@ -1,0 +1,9 @@
+PropBlueprint {
+    Categories = { 'RECLAIMABLE' },
+    Display = { MeshBlueprint = '/mods/Project Roc Unicorns/units/GGA2302/GGA2302_wreck_mesh' },
+    Economy = { ReclaimMassMax = 1, ReclaimTime = 5 },
+    Interface = { HelpText = 'Sha-Veyr wreckage' },
+    Physics = { BlockPath = false },
+    ScriptClass = 'Wreckage', ScriptModule = '/lua/wreckage.lua',
+    SizeX = 3.6, SizeY = 1.2, SizeZ = 3.6,
+}

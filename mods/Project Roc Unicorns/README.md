@@ -197,3 +197,41 @@ Halo Nest имеет продольную гондолу, семь боковы�
 передачи и уничтожения танка, купола и поведения M28AI. Категории строителей
 сверены с локальными blueprint Aeon; реальный `CanBuild` в матче не проверен.
 Танк без стандартного оружия не обязательно будет выбран M28AI как боевой юнит.
+
+## Возвращены Dush’Nai и Sha’Veyr
+
+Эти два юнита со всеми ресурсами возвращены из Additional Units. Их игровые характеристики и бинарные ресурсы сохранены. Itha-Suun и Itha-Vael остаются в отдельном моде.
+
+
+## T2 hover assault tank
+
+`GGA0401` **Dush'Nai** replaces the original Itha-Yen model with an eight-petal
+hover hull and paired floating gondolas. It has reflective dark steel, army-color
+ornaments and fixed violet ring lining. Two optimized SCM LODs share a 16-bone
+rig. Its construction icon now depicts this model.
+
+One main gun fires a fast phason sphere with a Seraphim trail at **80 range**, dealing **2,000
+damage** with **4 splash radius**, **1-second muzzle charge** and `RateOfFire =
+0.3`. Projectile speed is **70**. The four inherited AA weapons and AA metadata are removed. Ground/water
+speed remains **3.6**, reverse **2.5**. Durability is **6,000 hull HP** plus a
+**14,000 HP personal shield**, regenerating **1,000 HP/s after 5 seconds**.
+It costs **4,800 mass / 60,000 energy / 4,000 build points** and is available
+to Seraphim T2 and T3 engineers and commanders with the corresponding engineering upgrade.
+These balance and T2 availability changes have not yet been tested in a match.
+
+After a shot the gondolas close, electrical links intensify, the original phason
+model grows between the rings and the gondolas reopen. A full sphere waits for a
+target. A blocked terrain corridor is rejected before the native salvo/clock;
+the weapon searches actively known enemies with clear paths using its original
+priorities. A path closing during charge cancels discharge and its clock. No
+player orders, vision radius or projectile damage behavior are changed.
+
+User checks confirm building, movement, firing, accepted charge animation and
+AA removal. Latest blocked-target/progress recovery and the new icon have file
+and mocked-state checks, with fresh match verification pending. Source/rebuild
+instructions: [approved hover model](source-assets/GGA0401/approved-hover/README.md).
+
+
+`GGA2302` **Sha'Veyr** is a separate T3 twin-comet defense with range 80.
+It is buildable by Seraphim T3 engineers and commanders; its projectile,
+effects, model and wreck are included. [Details](docs/ShaVeyr-GGA2302.md).
