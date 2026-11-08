@@ -21,8 +21,8 @@ UnitBlueprint {
     StrategicIconName='Project Roc Unicorns/icon_aem2301',
     Weapon = {{
         Label='MainGun',DisplayName='Twin Aeon Missiles',WeaponCategory='Missile',
-        Damage=1200,DamageRadius=1,DamageType='Normal',DamageFriendly=false,CollideFriendly=false,
-        MaxRadius=128,MinRadius=8,RateOfFire=0.1,MuzzleVelocity=12,ProjectileLifetime=15,
+        Damage=2400,DamageRadius=2,DamageType='Normal',DamageFriendly=false,CollideFriendly=false,
+        MaxRadius=136,MinRadius=8,RateOfFire=0.1,MuzzleVelocity=12,ProjectileLifetime=15,
         ProjectileId='/projectiles/AIFMissileTactical01/AIFMissileTactical01_proj.bp',
         BallisticArc='RULEUBA_None',RangeCategory='UWRC_IndirectFire',
         FireTargetLayerCapsTable={Land='Land|Water'},AboveWaterTargetsOnly=true,

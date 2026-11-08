@@ -6,7 +6,7 @@ import sys,struct,json,math
 import numpy as np
 from PIL import Image
 SRC=Path(__file__).resolve().parent;MOD=SRC.parents[1]
-sys.path.insert(0,str(MOD/'source-assets/GGA0401'))
+sys.path.insert(0,str(MOD/'source-assets/GGA1401'))
 from supcom_binary import write_scm
 from wreck_skeleton import fx_skeleton
 REPORT={}
@@ -58,7 +58,7 @@ def dds(im,path):
   size=(max(1,current.width//2),max(1,current.height//2));current=Image.merge('RGBA',tuple(c.resize(size,Image.Resampling.LANCZOS) for c in current.split()))
  hdr=bytearray(d[:128]);struct.pack_into('<I',hdr,8,0xa1007);struct.pack_into('<4I',hdr,12,im.height,im.width,((im.width+3)//4)*((im.height+3)//4)*16,0);struct.pack_into('<I',hdr,28,len(levels));struct.pack_into('<I',hdr,108,0x401008);path.write_bytes(hdr+b''.join(levels))
 
-for unit,source_lods,scale in [('GGA0401',[1,2],.1),('GGA2404',[0,1],.05)]:
+for unit,source_lods,scale in [('GGA2404',[0,1],.05)]:
  folder=MOD/f'props/{unit}_wreck';folder.mkdir(parents=True,exist_ok=True)
  summary=[]
  for lod,source_lod in enumerate(source_lods):

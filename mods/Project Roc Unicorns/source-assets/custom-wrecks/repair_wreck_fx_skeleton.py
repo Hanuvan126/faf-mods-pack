@@ -4,11 +4,11 @@ from types import SimpleNamespace
 import sys,struct,json
 import numpy as np
 SRC=Path(__file__).resolve().parent;MOD=SRC.parents[1]
-sys.path.insert(0,str(MOD/'source-assets/GGA0401'))
+sys.path.insert(0,str(MOD/'source-assets/GGA1401'))
 from supcom_binary import write_scm
 from wreck_skeleton import fx_skeleton
 OUT=Path('F:/FAF-Development/outputs/VaelItha_Wreck_Death_Fix_v8');report=[]
-for uid in ['GGA2404','GGA0401']:
+for uid in ['GGA2404']:
     live=struct.unpack_from('<4s11I',(MOD/f'units/{uid}/{uid}_lod0.scm').read_bytes())[3]
     for lod in [0,1]:
         p=MOD/f'props/{uid}_wreck/{uid}_wreck_lod{lod}.scm';old=p.read_bytes();h=struct.unpack_from('<4s11I',old)
