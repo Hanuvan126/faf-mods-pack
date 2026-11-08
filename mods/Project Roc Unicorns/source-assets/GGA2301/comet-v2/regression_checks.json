@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "checks": [
+    "regression reproduces old wreck bone failure; corrected wreck passes every reachable bone",
+    "disabled artillery blueprint removed; unrelated units preserved",
+    "inline mesh LODs available for tarmac and build effects",
+    "80 range / 0.6 s / 45 velocity / 0.22 projectile diameter",
+    "zero world smoke velocity and acceleration / 0.32 s fade",
+    "symmetric fill masks and unfilled circular cutouts"
+  ],
+  "game_match_tested": false
+}

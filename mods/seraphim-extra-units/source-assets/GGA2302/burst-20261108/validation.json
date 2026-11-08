@@ -1,0 +1,49 @@
+{
+  "lua_syntax_files": 13,
+  "references_checked": 45,
+  "two_bursts": [
+    {
+      "time": 0,
+      "barrel": "MuzzleLeft"
+    },
+    {
+      "time": 0.2,
+      "barrel": "MuzzleLeft"
+    },
+    {
+      "time": 0.4,
+      "barrel": "MuzzleLeft"
+    },
+    {
+      "time": 0.6000000000000001,
+      "barrel": "MuzzleLeft"
+    },
+    {
+      "time": 0.8,
+      "barrel": "MuzzleLeft"
+    },
+    {
+      "time": 4.0,
+      "barrel": "MuzzleRight"
+    },
+    {
+      "time": 4.2,
+      "barrel": "MuzzleRight"
+    },
+    {
+      "time": 4.4,
+      "barrel": "MuzzleRight"
+    },
+    {
+      "time": 4.6000000000000005,
+      "barrel": "MuzzleRight"
+    },
+    {
+      "time": 4.800000000000001,
+      "barrel": "MuzzleRight"
+    }
+  ],
+  "obstruction_during_burst": "stops after two shots",
+  "native_state_logic": "from installed FAF DefaultProjectileWeapon.lua, mocked engine APIs",
+  "in_game_tested": false
+}

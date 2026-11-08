@@ -6,19 +6,18 @@
 | Юнит | Название | Назначение |
 | --- | --- | --- |
 | `GGA0401` | Dush'Nai | Штурмовой танк на воздушной подушке T2 |
-| `GGA0404` | Cyclops - Циклоп | Штурмовой шагоход T2 с центральным лучом и ПВО |
 | `GGA2302` | Sha'Veyr | Оборонительная башня T3 с двумя кометными пушками |
 | `GGA0402` | Itha-Suun | Танк с двумя фазонными пушками, четырьмя зенитками и персональным щитом |
 | `GGA0403` | Itha-Vael | Штурмовой танк «Полумесяц» с фазонной пушкой, четырьмя зенитками и персональным щитом |
 
-GGA0401 и GGA0404 доступны инженерам и командирам T2/T3, GGA0402 и GGA0403 — инженерам и командирам T3; GGA2302 строится инженерами и командирами T3.
+GGA0401 доступен инженерам и командирам T2/T3, GGA0402 и GGA0403 — инженерам и командирам T3; GGA2302 строится инженерами и командирами T3.
 Их blueprint ID, названия, баланс, модели, текстуры и иконки сохранены.
 Артиллерия GGA2404 Vael-Itha возвращена в Seraphim Rework и в этот мод не входит.
 
 ## Требования и установка
 
 Нужны Forged Alliance и FAF. Seraphim Rework не требуется. Оба актуальных мода
-можно включать вместе: GGA0401/GGA0402/GGA0403/GGA0404/GGA2302 находятся здесь, GGA2301/GGA2404 — в Project Roc Unicorns.
+можно включать вместе: GGA0401/GGA0402/GGA0403/GGA2302 находятся здесь, GGA2301/GGA2404 — в Project Roc Unicorns.
 
 Скопируйте папку `seraphim-extra-units` целиком в каталог `mods` данных FAF,
 с `mod_info.lua` в корне. Включите **Seraphim Additional Units** в списке
@@ -54,13 +53,13 @@ GGA0401 и GGA0404 доступны инженерам и командирам T
 [Itha-Vael: исходники](source-assets/GGA0403/README.md) ·
 [Проверка переноса](docs/MIGRATION.md).
 
-## Перенос Dush’Nai, Cyclops и Sha’Veyr
+## Перенос Dush’Nai и Sha’Veyr
 
 ## T2 hover assault tank
 
 `GGA0401` **Dush'Nai** replaces the original Itha-Yen model with an eight-petal
 hover hull and paired floating gondolas. It has reflective dark steel, army-color
-ornaments and fixed violet ring lining. Three native SCM LODs share a 33-bone
+ornaments and fixed violet ring lining. Two optimized SCM LODs share a 16-bone
 rig. Its construction icon now depicts this model.
 
 One main gun fires a fast phason sphere with a Seraphim trail at **80 range**, dealing **2,000
@@ -85,13 +84,11 @@ and mocked-state checks, with fresh match verification pending. Source/rebuild
 instructions: [approved hover model](source-assets/GGA0401/approved-hover/README.md).
 
 
-## T2 experimental Cyclops
-
-`GGA0404` **Cyclops - Циклоп** is a Seraphim walking experimental built by T2/T3 engineers and commanders with matching engineering upgrades. It appears only in the T2 construction tab: it retains its experimental description but uses the TECH2 category without EXPERIMENTAL. It costs 4,999 mass, 22,000 energy and 6,000 build time; movement speed is 2.5 and its footprint and construction skirt are 3×3. Initial hull health is provisionally 6,000. Its central surface beam has range 30, 25 damage per simulation tick (nominally 250 per second), five seconds active and a nominal seven-second shot cycle. Each hand carries the stock Uyanah surface and anti-air lightning weapon settings. The imported GLB, converter, animation and previews are in [the source directory](source-assets/GGA0404/README.md). A user reported a freeze and a broken model during construction. The source was rebuilt with 28 bones (the local shader palette has 80) and inline mesh LOD metadata for the Seraphim construction effect. The revised version has not yet been verified in a match; walk, aiming, timing, construction and M28AI selection remain unverified.
-
 `GGA2302` **Sha'Veyr** is a separate T3 twin-comet defense with range 80.
 It is buildable by Seraphim T3 engineers and commanders; its projectile,
 effects, model and wreck are included. [Details](docs/ShaVeyr-GGA2302.md).
 
 
 Игровые файлы, ресурсы, исходники и иконки перенесены в этот мод; работа в FAF после переноса ещё не проверена.
+
+Cyclops (GGA0404) удалён. Dush'Nai использует два оптимизированных LOD и 16 костей. Sha'Veyr занимает 2×2 клетки, выпускает по пять снарядов из одного ствола с интервалом 0,1 с и переключает ствол после очереди; пауза около 3 с. Добавлен звук PRU_ShaVeyr. Незаконченный шестиногий экспериментал в сборку не входит.

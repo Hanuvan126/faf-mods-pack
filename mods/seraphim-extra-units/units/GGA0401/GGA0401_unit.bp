@@ -60,7 +60,8 @@ UnitBlueprint {
         BuildCostMass = 4800, BuildCostEnergy = 60000, BuildTime = 4000,
         MaintenanceConsumptionPerSecondEnergy = 400,
     },
-    Footprint = { SizeX = 6, SizeZ = 6 },
+    -- IgnoreStructures (0x01): massive hover pathing, not just the UI ability.
+    Footprint = { SizeX = 6, SizeZ = 6, Flags = 1 },
     General = {
         FactionName = 'Seraphim', UnitName = "<LOC gga0401_name>Dush'Nai", Icon = 'amph',
         CommandCaps = {

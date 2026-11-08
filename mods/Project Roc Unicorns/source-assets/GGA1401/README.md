@@ -177,3 +177,7 @@ behavior. No local match has been run for this unit. In game, verify constructio
 menu visibility, 15,000/s economy increase, dome coverage/interception, toggle,
 recharge, animation, adjacency, Othuy release without an ordinary blast,
 unfinished-building destruction, safe reclaim and the game log.
+
+
+## Lightweight runtime export — 2026-11-07
+The runtime uses `optimized/lean-v1`; see its README and validation.json. The original procedural source remains intact. Running generate_caldera.py directly restores the heavier export.

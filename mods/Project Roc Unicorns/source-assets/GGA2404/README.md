@@ -345,3 +345,7 @@ Validation: both native LODs pass 436 ring-face visibility probes each and 192 i
 Install by replacing Project Roc Unicorns in FAF Mods with the complete folder from Project_Roc_Unicorns_LOCAL_v9.zip, then restart the game for a new test. Keep personal changes backed up. Everything is local; no upload to GitHub.
 
 Source: apply_artist_patterns.py (also called by generate_turret.py); build_artist_revision.py; refine_inner_contour.py; check_artist_revision.py; preview_artist_revision.py. Artist originals stored as petal_artist_reference_2026-11-02.png and gondola_artist_reference_2026-11-02.png. Crown means the central upper part of the foundation under the floating gun.
+
+
+## Lightweight export — 2026-11-07
+Runtime resources now use `optimized/lean-v1`; see its README and validation.json. Original source scene is preserved. Rebuilding a legacy generator will overwrite the optimized runtime meshes.

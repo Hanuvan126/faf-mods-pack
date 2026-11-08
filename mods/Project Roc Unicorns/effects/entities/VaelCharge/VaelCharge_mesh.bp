@@ -1,0 +1,10 @@
+MeshBlueprint {
+ LODs = { {
+  MeshName = '/mods/Project Roc Unicorns/projectiles/GGP2404/GGP2404_phason_lod0.scm',
+  AlbedoName = '/mods/Project Roc Unicorns/projectiles/GGP2404/GGP2404_phason_albedo.dds',
+  SpecularName = '/mods/Project Roc Unicorns/projectiles/GGP2404/GGP2404_phason_specteam.dds',
+  NormalsName = '/mods/Project Roc Unicorns/projectiles/GGP2404/GGP2404_phason_normalsTS.dds',
+  LookupName = '/textures/environment/Falloff_seraphim_lookup.dds',
+  ShaderName = 'Seraphim', LODCutoff = 700,
+ } },
+}

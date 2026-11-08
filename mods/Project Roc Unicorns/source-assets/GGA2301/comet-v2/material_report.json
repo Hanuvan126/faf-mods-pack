@@ -1,0 +1,20 @@
+{
+  "tank_metal_before": [
+    30.811866762570194,
+    32.21134040083123,
+    33.47439303307796
+  ],
+  "tank_metal_after": [
+    60.19472907203066,
+    62.396201700706676,
+    64.84335406376094
+  ],
+  "team_and_energy_preserved": true,
+  "turret_line_width_multiplier": 2,
+  "turret_team_specular": [
+    200,
+    190,
+    28,
+    0
+  ]
+}

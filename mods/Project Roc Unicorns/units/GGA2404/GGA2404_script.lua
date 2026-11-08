@@ -1,13 +1,16 @@
 local Structure = import('/lua/seraphimunits.lua').SStructureUnit
 local Cannon = import('/lua/seraphimweapons.lua').SDFExperimentalPhasonProj
+local ChargeFX = import('/mods/Project Roc Unicorns/lua/vael_charge_visual.lua')
 
 GGA2404 = ClassUnit(Structure) {
     OnStopBeingBuilt = function(self, builder, layer)
         Structure.OnStopBeingBuilt(self, builder, layer)
-        -- Animation setup cannot gate the native weapon. The tank's visible
-        -- charge projectile uses SetDrawScale, without particle helper methods.
-        self:ForkThread(self.InitializeGunAnimation)
-        self:GetWeaponByLabel('MainGun'):StartEconomyDrain()
+        self:InitializeGunAnimation()
+        local gun = self:GetWeaponByLabel('MainGun')
+        -- The weapon can already own an economy event before construction ends.
+        -- Seed the visual cycle even when StartEconomyDrain reuses that event.
+        self:AnimateRecharge(math.max(.1, gun:GetWeaponEnergyRequired() / gun:GetWeaponEnergyDrain()), false)
+        gun:StartEconomyDrain()
     end,
 
     InitializeGunAnimation = function(self)
@@ -25,14 +28,7 @@ GGA2404 = ClassUnit(Structure) {
         self.HoverSlider:SetSpeed(-1)
         self.Trash:Add(self.HoverSlider)
         self:ForkThread(self.FloatGunThread)
-        local visual = self:CreateProjectileAtBone(
-            '/mods/Project Roc Unicorns/projectiles/GGP2404Charge/GGP2404Charge_proj.bp', 'Charge')
-        if visual and not visual:BeenDestroyed() then
-            self.ChargeVisual = visual
-            visual:AttachBoneTo(-1, self, 'Charge')
-            visual:SetDrawScale(.000001)
-            self.Trash:Add(visual)
-        end
+        ChargeFX.Initialize(self)
         self:SetGunChargePose(0, false)
         local spin = CreateRotator(self, 'Charge', 'z')
         spin:SetTargetSpeed(65)
@@ -54,6 +50,7 @@ GGA2404 = ClassUnit(Structure) {
     end,
 
     SetGunChargePose = function(self, openness, visible)
+        self.GunChargeVisible = visible
         local previous = self.GondolaOpen
         self.GondolaOpen = openness
         -- Native slide goals use model units, matching the exported rig scale.
@@ -71,6 +68,7 @@ GGA2404 = ClassUnit(Structure) {
         local visual = self.ChargeVisual
         if visual and not visual:BeenDestroyed() then
             visual:SetDrawScale(visible and self.Blueprint.ChargeAnimation.VisualScale * (.05 + .95 * openness) or .000001)
+            ChargeFX.UpdateOrb(self, openness, visible)
         end
     end,
 
@@ -128,8 +126,14 @@ GGA2404 = ClassUnit(Structure) {
     OnKilled = function(self, instigator, damageType, overkillRatio)
         self.AnimationEpoch = (self.AnimationEpoch or 0) + 1
         self:SetGunChargePose(0, false)
+        ChargeFX.Stop(self)
         -- Native weapon destruction owns and cancels its economy event.
         Structure.OnKilled(self, instigator, damageType, overkillRatio)
+    end,
+
+    OnDestroy = function(self)
+        ChargeFX.Stop(self)
+        Structure.OnDestroy(self)
     end,
 
     Weapons = {
