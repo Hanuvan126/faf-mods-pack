@@ -1,8 +1,16 @@
 UnitBlueprint {
     Description = 'Twin Missile Defense',
-    Categories = {'SELECTABLE','AEON','STRUCTURE','DEFENSE','TECH2','INDIRECTFIRE','BUILTBYTIER2ENGINEER','BUILTBYTIER3ENGINEER','BUILTBYTIER2COMMANDER','BUILTBYTIER3COMMANDER','VISIBLETORECON','RECLAIMABLE','OVERLAYINDIRECTFIRE','SORTDEFENSE'},
-    General = {UnitName='Gemini', FactionName='Aeon', Category='Defense', Classification='RULEUC_Weapon', TechLevel='RULEUTL_Advanced', Icon='land', CommandCaps={RULEUCC_Attack=true,RULEUCC_Stop=true,RULEUCC_Guard=true,RULEUCC_RetaliateToggle=true}},
-    Display = { UniformScale=.04, Mesh={LODs={{LODCutoff=215,ShaderName='Aeon'}}}},
+    Categories = {'SELECTABLE','AEON','STRUCTURE','DEFENSE','TECH3','INDIRECTFIRE','DRAGBUILD','BUILTBYTIER3ENGINEER','BUILTBYTIER3COMMANDER','VISIBLETORECON','RECLAIMABLE','OVERLAYINDIRECTFIRE','SORTDEFENSE'},
+    General = {UnitName='Gemini', FactionName='Aeon', Category='Defense', Classification='RULEUC_Weapon', TechLevel='RULEUTL_Secret', Icon='land', CommandCaps={RULEUCC_Attack=true,RULEUCC_Stop=true,RULEUCC_Guard=true,RULEUCC_RetaliateToggle=true}},
+    Display = {
+        UniformScale=.0624,
+        Mesh={IconFadeInZoom=130,LODs={{LODCutoff=215,ShaderName='Aeon'}}},
+        Tarmacs={{
+            Albedo='Tarmacs/Tar8x_aeon_01_albedo', Normal='Tarmacs/Tar8x_aeon_01_normals',
+            Width=3.2, Length=3.2, Orientations={0,90,180,270},
+            DeathLifetime=300, FadeOut=150, RemoveWhenDead=false,
+        }},
+    },
     Defense = {Health=1800,MaxHealth=1800,ArmorType='Structure',SurfaceThreatLevel=20},
     Economy = {BuildCostMass=3000,BuildCostEnergy=22000,BuildTime=1600},
     Intel = {VisionRadius=26},
@@ -10,7 +18,7 @@ UnitBlueprint {
     SelectionSizeX=.65, SelectionSizeZ=.65, SelectionThickness=.65,
     Physics = {MotionType='RULEUMT_None',BuildOnLayerCaps={LAYER_Land=true},SkirtSizeX=2,SkirtSizeZ=2,SkirtOffsetX=-0.5,SkirtOffsetZ=-0.5,FlattenSkirt=true},
     Footprint = {SizeX=1,SizeZ=1},
-    StrategicIconName='icon_structure2_missile',
+    StrategicIconName='Project Roc Unicorns/icon_aem2301',
     Weapon = {{
         Label='MainGun',DisplayName='Twin Aeon Missiles',WeaponCategory='Missile',
         Damage=1200,DamageRadius=1,DamageType='Normal',DamageFriendly=false,CollideFriendly=false,
