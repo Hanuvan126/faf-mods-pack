@@ -5,7 +5,7 @@ local FirePath = import('/mods/Project Roc Unicorns/lua/sha_veyr_fire_path.lua')
 GGA2302 = ClassUnit(SStructureUnit) {
     Weapons = {
         MainGun = ClassWeapon(Cannon) {
-            FxMuzzleFlashScale = 0.35,
+            FxMuzzleFlashScale = 0.70,
             NextMuzzle = 'MuzzleLeft',
             CanWeaponFire = function(self)
                 return Cannon.CanWeaponFire(self) and FirePath.IsClear(self, self.NextMuzzle)
@@ -20,20 +20,39 @@ GGA2302 = ClassUnit(SStructureUnit) {
                 if not FirePath.IsClear(self, actual) then
                     self.RejectedTarget = self:GetCurrentTarget()
                     self.BlockedOnRelease = true
+                    self.HaltFireOrdered = true
                     return nil
                 end
                 local projectile = Cannon.CreateProjectileAtMuzzle(self, actual)
                 if projectile then
-                    self.NextMuzzle = actual == 'MuzzleLeft' and 'MuzzleRight' or 'MuzzleLeft'
+                    self.BurstHasFired = true
+                    self:ForkThread(self.PulseRecoil)
                 end
                 return projectile
             end,
+            -- Native muzzle salvo holds one barrel for all five shots.
+            -- OnWeaponFired runs once per salvo, not once per projectile.
             OnWeaponFired = function(self)
                 Cannon.OnWeaponFired(self)
-                if self.BlockedOnRelease then
-                    self.BlockedOnRelease = false
-                    ChangeState(self, self.BlockedState)
+                if self.BurstHasFired then
+                    self.NextMuzzle = self.NextMuzzle == 'MuzzleLeft' and 'MuzzleRight' or 'MuzzleLeft'
+                    self.BurstHasFired = false
                 end
+                -- Let native reload finish; ready-state obstruction recovery follows it.
+                self.BlockedOnRelease = false
+            end,
+            PulseRecoil = function(self)
+                if self:BeenDestroyed() or self.unit.Dead then return end
+                if not self.BurstRecoil then
+                    self.BurstRecoil = CreateSlider(self.unit, 'GunRecoil')
+                    self.Trash:Add(self.BurstRecoil)
+                end
+                self.BurstRecoil:SetSpeed(12)
+                self.BurstRecoil:SetGoal(0, 0, -0.20)
+                WaitTicks(1)
+                if self:BeenDestroyed() or self.unit.Dead then return end
+                self.BurstRecoil:SetGoal(0, 0, 0)
+                self.BurstRecoil:SetSpeed(4)
             end,
             BlockedState = State {
                 StateName = 'BlockedState',

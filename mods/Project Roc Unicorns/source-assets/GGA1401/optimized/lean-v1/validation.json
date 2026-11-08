@@ -1,0 +1,50 @@
+{
+  "before": {
+    "vertices": 43476,
+    "triangles": 25912,
+    "bones": 7,
+    "bytes": 3112784
+  },
+  "after": {
+    "lod0": {
+      "vertices": 7662,
+      "triangles": 12032,
+      "bones": 7,
+      "bytes": 594144
+    },
+    "lod1": {
+      "vertices": 2302,
+      "triangles": 3276,
+      "bones": 7,
+      "bytes": 177128
+    }
+  },
+  "textures": {
+    "albedo": {
+      "bytes": 349680,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mip_levels": 10
+    },
+    "specteam": {
+      "bytes": 349680,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mip_levels": 10
+    },
+    "normalsTS": {
+      "bytes": 349680,
+      "dimensions": [
+        512,
+        512
+      ],
+      "mip_levels": 10
+    }
+  },
+  "bone_records_unchanged": true,
+  "game_tested": false
+}

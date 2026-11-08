@@ -8,5 +8,7 @@ function ModBlueprints(all_blueprints)
         -- Keep Vothuun disabled even if an old blueprint remains in a source
         -- archive or an installation updated by merging folders.
         all_blueprints.Unit.gga2401 = nil
+        -- Removed Cyclops: suppress stale files when users merge an update.
+        all_blueprints.Unit.gga0404 = nil
     end
 end

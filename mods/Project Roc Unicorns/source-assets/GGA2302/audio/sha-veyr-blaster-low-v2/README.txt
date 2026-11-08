@@ -1,0 +1,1 @@
+Blaster variant A, oscillator frequencies lowered by ten semitones. Original durations and shot timing preserved. Two five-shot bursts each preview; 0.1 s spacing; burst starts 3.5 s apart. 48kHz PCM16 mono. Not integrated into game.

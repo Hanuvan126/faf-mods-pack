@@ -1,0 +1,44 @@
+{
+  "lod0": {
+    "vertices": 8232,
+    "triangles": 9781,
+    "bones": 16,
+    "texture_bytes": 8389104,
+    "bounds_min": [
+      -18.157855987548828,
+      1.3902318477630615,
+      -20.25054168701172
+    ],
+    "bounds_max": [
+      18.157855987548828,
+      22.02350616455078,
+      21.99308204650879
+    ]
+  },
+  "lod1": {
+    "vertices": 869,
+    "triangles": 1024,
+    "bones": 16,
+    "texture_bytes": 524784,
+    "bounds_min": [
+      -17.882896423339844,
+      1.3883401155471802,
+      -20.195951461791992
+    ],
+    "bounds_max": [
+      17.855072021484375,
+      21.964542388916016,
+      21.883628845214844
+    ]
+  },
+  "checks": [
+    "SCM bounds and indices",
+    "finite coordinates and unit normals",
+    "nondegenerate triangles",
+    "16 bones and original transforms/parent names",
+    "exact mirrored gondola geometry",
+    "vertex budgets",
+    "DDS headers, mip payloads and team masks"
+  ],
+  "game_test": "Not performed"
+}

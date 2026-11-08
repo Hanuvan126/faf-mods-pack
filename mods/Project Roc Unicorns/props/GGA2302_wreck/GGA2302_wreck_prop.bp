@@ -5,5 +5,5 @@ PropBlueprint {
     Interface = { HelpText = 'Sha-Veyr wreckage' },
     Physics = { BlockPath = false },
     ScriptClass = 'Wreckage', ScriptModule = '/lua/wreckage.lua',
-    SizeX = 1.8, SizeY = 0.6, SizeZ = 1.8,
+    SizeX = 3.6, SizeY = 1.2, SizeZ = 3.6,
 }

@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    "Lua syntax",
+    "stock T2 footprint",
+    "alternating actual muzzles and flashes",
+    "blocked shot suppression",
+    "ridge and wall segment tests",
+    "SCM bone/index bounds",
+    "resource resolution"
+  ],
+  "meshes": [
+    {
+      "file": "projectiles\\GGP2301\\GGP2301_lod0.scm",
+      "vertices": 312,
+      "triangles": 576,
+      "bones": 1
+    },
+    {
+      "file": "units\\GGA2301\\GGA2301_lod0.scm",
+      "vertices": 25286,
+      "triangles": 49860,
+      "bones": 6
+    },
+    {
+      "file": "units\\GGA2301\\GGA2301_lod1.scm",
+      "vertices": 10228,
+      "triangles": 19916,
+      "bones": 6
+    },
+    {
+      "file": "units\\GGA2301\\GGA2301_wreck.scm",
+      "vertices": 10228,
+      "triangles": 19916,
+      "bones": 1
+    }
+  ],
+  "game_match_tested": false
+}

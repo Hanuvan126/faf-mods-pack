@@ -194,8 +194,3 @@ while retaining a rounded, attached crystal. Its round base now fits edge to
 edge within the 3×3 world-unit building square. Both LODs, the muzzle pivot,
 collision height and construction icons were updated. The exported meshes and
 preview were checked; the revised proportions and firing still need a match.
-
-
-## T2 experimental Cyclops
-
-`GGA0404` **Cyclops - Циклоп** is a Seraphim walking experimental built by T2/T3 engineers and commanders with matching engineering upgrades. It appears only in the T2 construction tab: it retains its experimental description but uses the TECH2 category without EXPERIMENTAL. It costs 4,999 mass, 22,000 energy and 6,000 build time; movement speed is 2.5 and its footprint and construction skirt are 3×3. Initial hull health is provisionally 6,000. Its central surface beam has range 30, 25 damage per simulation tick (nominally 250 per second), five seconds active and a nominal seven-second shot cycle. Each hand carries the stock Uyanah surface and anti-air lightning weapon settings. The imported GLB, converter, animation and previews are in [the source directory](source-assets/GGA0404/README.md). A user reported a freeze and a broken model during construction. The source was rebuilt with 28 bones (the local shader palette has 80) and inline mesh LOD metadata for the Seraphim construction effect. The revised version has not yet been verified in a match; walk, aiming, timing, construction and M28AI selection remain unverified.

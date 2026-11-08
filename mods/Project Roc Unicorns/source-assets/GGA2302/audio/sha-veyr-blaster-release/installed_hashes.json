@@ -1,0 +1,14 @@
+{
+  "units/GGA2302/GGA2302_unit.bp": {
+    "bytes": 7312,
+    "sha256": "f2630e837c1fe0428dcfa256dd86e6cae9f3f5fb974b07863cca51d68e258fba"
+  },
+  "sounds/PRU_ShaVeyr.xsb": {
+    "bytes": 298,
+    "sha256": "e3a7945c5e40518717a20efb673228ce9d2552ac22b536bd5caa17ccd0b6b22e"
+  },
+  "sounds/PRU_ShaVeyr.xwb": {
+    "bytes": 43372,
+    "sha256": "058897a8d4af7af92c2f45d507928fa6bc0b71db7718fb465e19b43ffbb60030"
+  }
+}

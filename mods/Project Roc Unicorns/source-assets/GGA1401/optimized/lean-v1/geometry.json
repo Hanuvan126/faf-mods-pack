@@ -1,0 +1,12 @@
+{
+  "lod0": {
+    "vertices": 7662,
+    "triangles": 12032,
+    "bytes": 594144
+  },
+  "lod1": {
+    "vertices": 2302,
+    "triangles": 3276,
+    "bytes": 177128
+  }
+}

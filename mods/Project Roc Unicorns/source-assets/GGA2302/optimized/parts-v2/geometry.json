@@ -1,0 +1,158 @@
+[
+  {
+    "lod": 0,
+    "vertices": 2233,
+    "triangles": 4400,
+    "bones": 6,
+    "parts": [
+      [
+        "Sculpted continuous pedestal",
+        950
+      ],
+      [
+        "Fixed upper bearing",
+        120
+      ],
+      [
+        "Rotating race",
+        144
+      ],
+      [
+        "Bearing white band",
+        96
+      ],
+      [
+        "Wide turtle carapace",
+        850
+      ],
+      [
+        "Barrel armored lip",
+        240
+      ],
+      [
+        "Machined muzzle rim",
+        160
+      ],
+      [
+        "Deep barrel lining",
+        96
+      ],
+      [
+        "White accelerator ring",
+        96
+      ],
+      [
+        "White accelerator ring.001",
+        96
+      ],
+      [
+        "White accelerator ring.002",
+        96
+      ],
+      [
+        "Barrel dark rear",
+        96
+      ],
+      [
+        "Barrel armored lip.001",
+        240
+      ],
+      [
+        "Machined muzzle rim.001",
+        160
+      ],
+      [
+        "Deep barrel lining.001",
+        96
+      ],
+      [
+        "White accelerator ring.003",
+        96
+      ],
+      [
+        "White accelerator ring.004",
+        96
+      ],
+      [
+        "White accelerator ring.005",
+        96
+      ],
+      [
+        "Barrel dark rear.001",
+        96
+      ],
+      [
+        "Swept muzzle shoulder",
+        120
+      ],
+      [
+        "Swept lower cheek",
+        120
+      ],
+      [
+        "Swept muzzle shoulder.001",
+        120
+      ],
+      [
+        "Swept lower cheek.001",
+        120
+      ]
+    ]
+  },
+  {
+    "lod": 1,
+    "vertices": 371,
+    "triangles": 634,
+    "bones": 6,
+    "parts": [
+      [
+        "Sculpted continuous pedestal",
+        208
+      ],
+      [
+        "Fixed upper bearing",
+        16
+      ],
+      [
+        "Rotating race",
+        16
+      ],
+      [
+        "Wide turtle carapace",
+        170
+      ],
+      [
+        "Barrel armored lip",
+        48
+      ],
+      [
+        "Deep barrel lining",
+        16
+      ],
+      [
+        "Barrel armored lip.001",
+        48
+      ],
+      [
+        "Deep barrel lining.001",
+        16
+      ],
+      [
+        "Swept muzzle shoulder",
+        24
+      ],
+      [
+        "Swept lower cheek",
+        24
+      ],
+      [
+        "Swept muzzle shoulder.001",
+        24
+      ],
+      [
+        "Swept lower cheek.001",
+        24
+      ]
+    ]
+  }
+]

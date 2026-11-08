@@ -1,0 +1,18 @@
+{
+  "shots_per_burst": 5,
+  "shot_interval_seconds": 0.2,
+  "native_salvo_duration_seconds": 1,
+  "reload_seconds": 3,
+  "barrel_sequence": "LLLLL RRRRR",
+  "projectile_scale": 4,
+  "projectile_speed": 22.5,
+  "splash_radius": 2,
+  "randomness": 0.6,
+  "range": 80,
+  "damage_per_projectile": 130,
+  "tower_scale": 0.8,
+  "construction_skirt": [
+    4,
+    4
+  ]
+}

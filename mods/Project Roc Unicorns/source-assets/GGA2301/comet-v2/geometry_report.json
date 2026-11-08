@@ -1,0 +1,12 @@
+[
+  {
+    "lod": 0,
+    "vertices": 25334,
+    "triangles": 49860
+  },
+  {
+    "lod": 1,
+    "vertices": 10270,
+    "triangles": 19916
+  }
+]
