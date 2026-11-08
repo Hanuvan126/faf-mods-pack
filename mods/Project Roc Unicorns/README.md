@@ -9,12 +9,18 @@ Project Roc Unicorns. Both mods can be enabled together.
 
 ## Aeon: Gemini missile defense
 
-`AEM2301` **Gemini** is a prototype T2 Aeon missile defense transferred from
+`AEM2301` **Gemini** is a prototype T3 Aeon missile defense transferred from
 AeonMissileTurret. It retains its model, textures and weapon script:
 two missiles per salvo, 1,200 damage each, range 8–128, a nominal 10-second
 cycle between salvos, 1,800 health and a cost of
-3,000 mass / 22,000 energy / 1,600 build points. Its blueprint lists Aeon T2–T3
+3,000 mass / 22,000 energy / 1,600 build points. Its blueprint lists Aeon T3
 engineers and appropriately upgraded commanders as builders. Balance is provisional.
+
+Its game LOD0 uses the 3,000-triangle optimized mesh, retaining the original
+five-bone skeleton and muzzle positions. The original SCM and conversion script
+are archived under `source-assets/AEM2301`. The model is scaled to 156% of its original size and uses
+an Aeon ground decal; the 1×1 footprint is unchanged. These changes still require
+in-game checks, especially aiming and ground-decal placement.
 
 The model and textures derive from the stock UAB2101 by Gas Powered Games.
 The original sources, package notes and file validation are preserved in
